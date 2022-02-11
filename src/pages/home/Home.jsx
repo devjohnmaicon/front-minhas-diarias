@@ -1,64 +1,71 @@
 import React from "react";
-import { AppContainer, Buttons, Headding, Rows } from "./styleHome";
+import { Row } from "./Row";
+import { AppContainer, Box, Buttons, Headding, Rows } from "./styleHome";
+import { BsPlusLg } from "react-icons/bs";
+
+const mock = [
+  {
+    paid_out: true,
+    type: "Diária",
+    date: "14/12/1996",
+    value: "70,00",
+  },
+  {
+    paid_out: false,
+    type: "Pagamento",
+    date: "05/12/2000",
+    value: "100,00",
+  },
+  {
+    paid_out: true,
+    type: "Diária",
+    date: "04/07/2022",
+    value: "70,00",
+  },
+  {
+    paid_out: false,
+    type: "Pagamento",
+    date: "05/12/2000",
+    value: "100,00",
+  },
+  {
+    paid_out: true,
+    type: "Diária",
+    date: "04/07/2022",
+    value: "70,00",
+  },
+  {
+    paid_out: true,
+    type: "Diária",
+    date: "04/07/2022",
+    value: "70,00",
+  },
+];
 
 export const Home = () => {
   return (
     <AppContainer>
       <Headding>
-        <h2>Débito</h2>
+        <h3>Valor da divida</h3>
         <div className="box-heading">
-          <span>
-            <strong>RS</strong> 1.000,00{" "}
-          </span>
+          <sub>R$</sub>
+          <span>1.000,00</span>
         </div>
       </Headding>
 
-      <Rows>
-        <div className="row">
-          <h3>Icon</h3>
-          <div className="info">
-            <p>Diária</p>
-            <span>14/12/2012</span>
-          </div>
-          <h2>R$ 70,00</h2>
-        </div>
-        <div className="row">
-          <h3>Icon</h3>
-          <div className="info">
-            <p>Diária</p>
-            <span>14/12/2012</span>
-          </div>
-          <h2>R$ 70,00</h2>
-        </div>
-        <div className="row">
-          <h3>Icon</h3>
-          <div className="info">
-            <p>Diária</p>
-            <span>14/12/2012</span>
-          </div>
-          <h2>R$ 70,00</h2>
-        </div>
-        <div className="row">
-          <h3>Icon</h3>
-          <div className="info">
-            <p>Diária</p>
-            <span>14/12/2012</span>
-          </div>
-          <h2>R$ 70,00</h2>
-        </div>
-        <div className="row">
-          <h3>Icon</h3>
-          <div className="info">
-            <p>Diária</p>
-            <span>14/12/2012</span>
-          </div>
-          <h2>R$ 70,00</h2>
-        </div>
-      </Rows>
+      <Box>
+        <Rows>
+          {mock.map((data, index) => (
+            <Row data={data} key={index} />
+          ))}
+        </Rows>
 
-      <Buttons>
-        <button>Adicionar</button>
-      </Buttons>
+        <Buttons>
+          <button>
+            <BsPlusLg size={"1.2rem"} />
+          </button>
+        </Buttons>
+      </Box>
     </AppContainer>
   );
 };

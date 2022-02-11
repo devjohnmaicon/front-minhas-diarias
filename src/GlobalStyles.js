@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     outline: none;
     border: none;
-    color: #fff;
+    font-family: sans-serif;
 }
 
 
