@@ -13,7 +13,7 @@ export const AppContainer = styled.div`
   @media screen and (min-width: 768px) {
     height: 95%;
     margin: 1.5rem auto;
-    border: 2px solid #efb7b7;
+    /* border: 2px solid #efb7b7; */
   }
 `;
 
@@ -74,8 +74,8 @@ export const Box = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    border-top-left-radius: 8%;
-    border-top-right-radius: 8%;
+    border-top-left-radius: 6%;
+    border-top-right-radius: 6%;
   }
 `;
 
@@ -86,13 +86,9 @@ export const Buttons = styled.div`
   border-bottom-left-radius: 9px;
   border-bottom-right-radius: 9px;
   border-top: 1px solid rgba(0, 0, 0, 0.6);
-  padding: 0.8rem;
 
   button {
-    font-size: 1rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-    color: #000;
+    margin: 0.8rem auto;
     padding: 1rem 4rem;
     background-color: #efb7b7;
     border-radius: 10px;

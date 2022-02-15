@@ -18,6 +18,20 @@ const GlobalStyle = createGlobalStyle`
     padding: .5rem;
 }
 
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 1.2rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #BD4B4B;
+  border-radius: 20px;
+}
+
 `;
 
 export default GlobalStyle;
