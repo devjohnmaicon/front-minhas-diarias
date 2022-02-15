@@ -1,21 +1,29 @@
 import styled from "styled-components";
 
 export const AppContainer = styled.div`
-  /* background-color: red; */
-  border: 1px solid #efb7b7;
-  max-width: 425px;
-  min-width: 300px;
+  /* border: 2px solid #efb7b7; */
   border-radius: 10px;
-  padding-top: 1rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 768px;
+
+  @media screen and (min-width: 768px) {
+    height: 95%;
+    margin: 1.5rem auto;
+    border: 2px solid #efb7b7;
+  }
 `;
 
 export const Headding = styled.div`
-  display: grid;
-  place-content: center;
-  margin-bottom: 1.6rem;
+  padding: 1rem;
 
   h3 {
     color: #fff;
+    font-size: 1.3rem;
+    font-weight: bolder;
   }
 
   .box-heading {
@@ -27,8 +35,8 @@ export const Headding = styled.div`
     display: flex;
 
     sub {
-      font-size: 1rem;
-      margin-right: 0.4rem;
+      font-size: 1.2rem;
+      margin-right: 0.5rem;
     }
 
     span {
@@ -37,25 +45,48 @@ export const Headding = styled.div`
       font-size: 2.5rem;
     }
   }
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .box-heading {
+      margin-top: 1rem;
+      padding: 1.5rem 2.5rem;
+    }
+  }
 `;
 
 export const Box = styled.div`
   background-color: #eeeeee;
-  border-radius: 30px 30px 10px 10px;
-`;
+  height: 100%;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
 
-export const Rows = styled.div`
-  height: 310px;
+  padding: 0.4rem;
   overflow-y: scroll;
-  /* border-bottom: 2px solid rgba(0,0,0,.6); */
-  box-shadow: -2px -9px 30px 7px rgba(0, 0, 0, 0.4);
+
+  table {
+    width: 100%;
+    border-spacing: 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    border-top-left-radius: 8%;
+    border-top-right-radius: 8%;
+  }
 `;
 
 export const Buttons = styled.div`
+  background-color: #eeeeee;
   display: flex;
   justify-content: center;
-  /* margin: 1.6rem; */
-  padding: 1rem 0 0.7rem;
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+  border-top: 1px solid rgba(0, 0, 0, 0.6);
+  padding: 0.8rem;
 
   button {
     font-size: 1rem;

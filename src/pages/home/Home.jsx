@@ -40,6 +40,18 @@ const mock = [
     date: "04/07/2022",
     value: "70,00",
   },
+  {
+    paid_out: true,
+    type: "Diária",
+    date: "04/07/2022",
+    value: "70,00",
+  },
+  {
+    paid_out: true,
+    type: "Diária",
+    date: "04/07/2022",
+    value: "70,00",
+  },
 ];
 
 export const Home = () => {
@@ -54,18 +66,19 @@ export const Home = () => {
       </Headding>
 
       <Box>
-        <Rows>
-          {mock.map((data, index) => (
-            <Row data={data} key={index} />
-          ))}
-        </Rows>
-
-        <Buttons>
-          <button>
-            <BsPlusLg size={"1.2rem"} />
-          </button>
-        </Buttons>
+        <table>
+          <tbody>
+            {mock.map((item, index) => (
+              <Row key={index} item={item} />
+            ))}
+          </tbody>
+        </table>
       </Box>
+      <Buttons>
+        <button>
+          <BsPlusLg size={"1.2rem"} />
+        </button>
+      </Buttons>
     </AppContainer>
   );
 };

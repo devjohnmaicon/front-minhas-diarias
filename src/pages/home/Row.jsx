@@ -3,35 +3,39 @@ import styled from "styled-components";
 import { FiDollarSign } from "react-icons/fi";
 import { FaDiaspora } from "react-icons/fa";
 
-export const Row = ({ data }) => {
-  const { paid_out, type, date, value } = data;
+export const Row = ({ item }) => {
+  const { paid_out, type, date, value } = item;
 
-  const paiment = paid_out ? `R$ ${value}` : `- R$ ${value}`;
+  const paiment = paid_out ? `R$ ${value}` : `R$ ${value}`;
 
   return (
-    <RowComponent className="row" paid_out={paid_out}>
-      <h3>
+    <TableRow className="row" paid_out={paid_out}>
+      <td>
         {paid_out ? (
           <FaDiaspora />
         ) : (
-          <FiDollarSign size={"1.8rem"} color="#4E9F3D" />
+          <FiDollarSign size={"1.4rem"} color="#4E9F3D" />
         )}
-      </h3>
-      <div className="info">
+      </td>
+
+      <td className="info">
         <p>{type}</p>
         <span>{date}</span>
-      </div>
-      <span>{paiment}</span>
-    </RowComponent>
+      </td>
+
+      <td>
+        <span className="value">{paiment}</span>
+      </td>
+    </TableRow>
   );
 };
 
-const RowComponent = styled.div`
+const TableRow = styled.tr`
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding: 0.4rem 0;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid ${(props) => (props.paid_out ? "" : "#4E9F3D")};
 
   h3 {
     color: #000;
@@ -40,25 +44,22 @@ const RowComponent = styled.div`
   }
 
   .info {
-    width: 40%;
-
     span,
     p {
       color: #000;
     }
 
     p {
-      font-size: 1.4rem;
+      font-weight: bolder;
+      margin-bottom: 2px;
     }
 
     span {
-      font-size: 1rem;
       font-weight: 100;
-      padding: 1rem 0;
     }
   }
 
-  span {
+  .value {
     font-weight: 600;
     font-size: 1.2rem;
     color: ${(props) => (props.paid_out ? "" : "#4E9F3D")};
@@ -66,5 +67,19 @@ const RowComponent = styled.div`
 
   :last-child {
     border-bottom: none;
+  }
+
+  @media screen and (min-width: 768px) {
+
+
+    .info {
+      display: flex;
+      padding: 0.8rem;
+      font-size: 1.2rem;
+
+      p {
+        margin-right: 2.5rem;
+      }
+    }
   }
 `;

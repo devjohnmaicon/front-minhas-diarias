@@ -11,15 +11,11 @@ const GlobalStyle = createGlobalStyle`
     font-family: sans-serif;
 }
 
-
-body{
-    background-color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.App{
+    width: 100%;
     height: 100vh;
-    width: 100vw;
-    padding: .2rem;
+    background-color: #000;
+    padding: .5rem;
 }
 
 `;
