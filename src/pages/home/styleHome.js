@@ -10,6 +10,8 @@ export const AppContainer = styled.div`
   margin: 0 auto;
   max-width: 768px;
 
+  position: relative;
+
   @media screen and (min-width: 768px) {
     height: 95%;
     margin: 1.5rem auto;
@@ -62,8 +64,8 @@ export const Headding = styled.div`
 export const Box = styled.div`
   background-color: #eeeeee;
   height: 100%;
-  border-top-left-radius: 10%;
-  border-top-right-radius: 10%;
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
 
   padding: 0.4rem;
   overflow-y: scroll;
@@ -74,8 +76,8 @@ export const Box = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    border-top-left-radius: 6%;
-    border-top-right-radius: 6%;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
   }
 `;
 
@@ -95,3 +97,4 @@ export const Buttons = styled.div`
     cursor: pointer;
   }
 `;
+
