@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Store } from "../contexts/GlobalContext";
 
 const initialValues = {
   type: "daily",
@@ -8,13 +9,15 @@ const initialValues = {
   description: "",
 };
 
-export const Modal = ({ toggleModal, addDaily }) => {
+export const Modal = ({ addDaily }) => {
   const [values, setValues] = useState(initialValues);
+
+  const { toggleModal } = Store();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    console.log(value)
+    console.log(value);
     setValues({ ...values, [name]: value });
   };
 

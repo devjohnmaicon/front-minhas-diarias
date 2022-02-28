@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Row } from "./Row";
 import { AppContainer, Box, Buttons, Headding } from "./styleHome";
 import { BsPlusLg } from "react-icons/bs";
 import { Modal } from "../../components/Modal";
+import { ContextState, Store } from "../../contexts/GlobalContext";
 
 const mock = [
   {
@@ -20,7 +21,7 @@ const mock = [
   {
     type: "Diária",
     date: "04/07/2022",
-    value: 10.0,
+    value: 20.0,
     description: "lorem lorem lorem lorem lorem lorem lorem lorem lorem",
   },
 ];
@@ -28,17 +29,12 @@ const mock = [
 export const Home = () => {
   const [dailies, setDailies] = useState(mock);
   const [debt, setDebt] = useState(0);
-  const [openModal, setOpenModal] = useState(false);
 
-  const toggleModal = () => {
-    setOpenModal(!openModal);
-  };
+  const { state, dispatch, toggleModal } = Store();
+
   const addDaily = (newDaily) => {
     setDailies([...dailies, newDaily]);
   };
-
-  console.log(dailies)
-
 
   useEffect(() => {
     function calcDebt() {
@@ -58,7 +54,7 @@ export const Home = () => {
         <h3>Valor da divida</h3>
         <div className="box-heading">
           <sub>R$</sub>
-          <span>{`R$ ${debt}`}</span>
+          <span>{debt}</span>
         </div>
       </Headding>
 
@@ -77,7 +73,7 @@ export const Home = () => {
         </button>
       </Buttons>
 
-      {openModal && <Modal toggleModal={toggleModal} addDaily={addDaily} />}
+      {state.modal && <Modal addDaily={addDaily} />}
     </AppContainer>
   );
 };
