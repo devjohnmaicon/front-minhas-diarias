@@ -4,14 +4,12 @@ import { FiDollarSign } from "react-icons/fi";
 import { FaDiaspora } from "react-icons/fa";
 
 export const Row = ({ item }) => {
-  const { paid_out, type, date, value } = item;
-
-  const paiment = paid_out ? `R$ ${value}` : `R$ ${value}`;
+  const { type, date, value } = item;
 
   return (
-    <TableRow className="row" paid_out={paid_out}>
+    <TableRow className="row" type={type}>
       <td>
-        {paid_out ? (
+        {type == "1" ? (
           <FaDiaspora />
         ) : (
           <FiDollarSign size={"1.4rem"} color="#4E9F3D" />
@@ -19,12 +17,12 @@ export const Row = ({ item }) => {
       </td>
 
       <td className="info">
-        <p>{type}</p>
+        <p>{type == "1" ? "Diária" : "Pagamento"}</p>
         <span>{date}</span>
       </td>
 
       <td>
-        <span className="value">{paiment}</span>
+        <span className="value">{`R$  ${value},00`}</span>
       </td>
     </TableRow>
   );
@@ -35,7 +33,7 @@ const TableRow = styled.tr`
   align-items: center;
   justify-content: space-around;
   padding: 0.4rem 0;
-  border-bottom: 1px solid ${(props) => (props.paid_out ? "" : "#4E9F3D")};
+  border-bottom: 1px solid ${(props) => (props.type === "1" ? "" : "#4E9F3D")};
 
   h3 {
     color: #000;
@@ -46,7 +44,7 @@ const TableRow = styled.tr`
   .info {
     span,
     p {
-      color: #000;
+      color: ${(props) => (props.type === "1" ? "" : "#4E9F3D")};
     }
 
     p {
@@ -62,7 +60,7 @@ const TableRow = styled.tr`
   .value {
     font-weight: 600;
     font-size: 1.2rem;
-    color: ${(props) => (props.paid_out ? "" : "#4E9F3D")};
+    color: ${(props) => (props.type === "1" ? "" : "#4E9F3D")};
   }
 
   :last-child {
@@ -70,8 +68,6 @@ const TableRow = styled.tr`
   }
 
   @media screen and (min-width: 768px) {
-
-
     .info {
       display: flex;
       padding: 0.8rem;

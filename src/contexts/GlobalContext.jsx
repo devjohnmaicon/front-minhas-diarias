@@ -1,4 +1,4 @@
-const { createContext, useContext, useReducer } = require("react");
+const { createContext, useContext, useReducer, useEffect } = require("react");
 
 export const GlobalContext = createContext();
 

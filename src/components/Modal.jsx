@@ -1,30 +1,35 @@
+import { type } from "@testing-library/user-event/dist/type";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Store } from "../contexts/GlobalContext";
 
 const initialValues = {
-  type: "daily",
+  type: "1",
   value: 0,
   date: "01/03/2022",
   description: "",
 };
 
 export const Modal = ({ addDaily }) => {
-  const [values, setValues] = useState(initialValues);
+  const [daily, setDaily] = useState(initialValues);
 
   const { toggleModal } = Store();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    console.log(value);
-    setValues({ ...values, [name]: value });
+    name === "value"
+      ? setDaily({ ...daily, [name]: parseFloat(value) })
+      : setDaily({ ...daily, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    addDaily(values);
+    daily.type === "2"
+      ? addDaily({ ...daily, value: -daily.value })
+      : addDaily(daily);
+
     toggleModal();
   };
 
@@ -35,9 +40,9 @@ export const Modal = ({ addDaily }) => {
 
         <div className="box-form">
           <label htmlFor="">Tipo</label>
-          <select name="type" value={values.type} onChange={handleChange}>
-            <option value="daily">Diária</option>
-            <option value="paiment">Pagamento</option>
+          <select name="type" value={daily.type} onChange={handleChange}>
+            <option value="1">Diária</option>
+            <option value="2">Pagamento</option>
           </select>
         </div>
 
@@ -58,8 +63,7 @@ export const Modal = ({ addDaily }) => {
             type="text"
             placeholder="Valor"
             className="input-value"
-            // onChange={handleChange}
-            value={values.date}
+            value={daily.date}
             disabled
           />
         </div>
@@ -103,8 +107,7 @@ export const ContainerModal = styled.div`
 
 export const Form = styled.form`
   background-color: #eeeeee;
-  /* height: 50%; */
-  height: 100%;
+  height: 95%;
   width: 70%;
   min-height: 500px;
   min-width: 300px;
@@ -115,16 +118,16 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: space-around;
 
-  padding: 2rem;
+  padding: 1.4rem 1rem 0;
 
   h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .box-form {
     display: flex;
     flex-direction: column;
-    margin-top: 1rem;
+    margin-top: 0.8rem;
 
     label {
       margin-bottom: 0.4rem;

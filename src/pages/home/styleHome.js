@@ -30,11 +30,12 @@ export const Headding = styled.div`
 
   .box-heading {
     background-color: #bd4b4b;
-    padding: 1.2rem 2.2rem;
     border-radius: 15px;
     margin-top: 0.5rem;
+    padding: 1rem;
 
     display: flex;
+    justify-content: center;
 
     sub {
       font-size: 1.2rem;
@@ -64,20 +65,14 @@ export const Headding = styled.div`
 export const Box = styled.div`
   background-color: #eeeeee;
   height: 100%;
-  border-top-left-radius: 5%;
-  border-top-right-radius: 5%;
+  border-top-left-radius: 3%;
+  border-top-right-radius: 3%;
 
-  padding: 0.4rem;
   overflow-y: scroll;
 
   table {
     width: 100%;
     border-spacing: 0;
-  }
-
-  @media screen and (min-width: 768px) {
-    border-top-left-radius: 2%;
-    border-top-right-radius: 2%;
   }
 `;
 
@@ -97,4 +92,3 @@ export const Buttons = styled.div`
     cursor: pointer;
   }
 `;
-
