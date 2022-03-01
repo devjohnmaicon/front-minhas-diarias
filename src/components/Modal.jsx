@@ -47,11 +47,11 @@ export const Modal = ({ addDaily }) => {
         </div>
 
         <div className="box-form">
-          <label htmlFor="">Valor</label>
+          <label htmlFor=""> R$ / Valor </label>
           <input
             name="value"
             type="number"
-            placeholder="R$ 60,00"
+            placeholder="60,00"
             className="input-value"
             onChange={handleChange}
           />
@@ -106,12 +106,12 @@ export const ContainerModal = styled.div`
 `;
 
 export const Form = styled.form`
-  background-color: #eeeeee;
+  background-color: #171717;
   height: 95%;
   width: 70%;
   min-height: 500px;
   min-width: 300px;
-  border-radius: 4%;
+  border-radius: 2%;
   box-shadow: 0px 10px 13px -7px #000000;
 
   display: flex;
@@ -135,19 +135,21 @@ export const Form = styled.form`
 
     select {
       font-size: 1.4rem;
+      background-color: #ededed;
     }
 
     .input-value {
       font-size: 1.4rem;
-      padding: 0.8rem 0;
+      padding: 0.5rem;
+      background-color: #ededed;
     }
 
     .input-text_area {
-      background-color: #dddddd;
       resize: none;
       border-radius: 5px;
       padding: 0.6rem;
       font-size: 1.2rem;
+      background-color: #ededed;
     }
   }
 
@@ -160,15 +162,18 @@ export const Form = styled.form`
 
     .btn-submit {
       padding: 0.8rem;
-      background-color: #efb7b7;
+      background-color: #bd4b4b;
+      color: #ededed;
       border-radius: 5px;
       font-size: 1rem;
       cursor: pointer;
     }
 
     .btn-cancel {
+      background-color: transparent;
       cursor: pointer;
       font-size: 1rem;
+      color: #fff;
     }
   }
 `;

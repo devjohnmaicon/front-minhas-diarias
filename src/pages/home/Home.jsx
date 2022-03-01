@@ -13,7 +13,6 @@ export const Home = () => {
   const { state, dispatch, toggleModal } = Store();
 
   const addDaily = (daily) => {
-    console.log("daily", daily);
     setDailies([...dailies, daily]);
   };
 
@@ -22,8 +21,6 @@ export const Home = () => {
       const valueTotal = dailies
         .map((daily) => daily.value)
         .reduce((prev, current) => prev + current);
-
-      console.log("valueTotal", valueTotal);
 
       setDebit(valueTotal);
     };
@@ -52,7 +49,7 @@ export const Home = () => {
 
       <Buttons>
         <button onClick={toggleModal}>
-          <BsPlusLg size={"1.2rem"} />
+          <BsPlusLg size={"1.2rem"} color='#EDEDED' />
         </button>
       </Buttons>
 

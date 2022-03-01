@@ -11,11 +11,11 @@ export const AppContainer = styled.div`
   max-width: 768px;
 
   position: relative;
+  color: #ededed;
 
   @media screen and (min-width: 768px) {
     height: 95%;
     margin: 1.5rem auto;
-    /* border: 2px solid #efb7b7; */
   }
 `;
 
@@ -40,6 +40,7 @@ export const Headding = styled.div`
     sub {
       font-size: 1.2rem;
       margin-right: 0.5rem;
+      color: #000;
     }
 
     span {
@@ -63,7 +64,7 @@ export const Headding = styled.div`
 `;
 
 export const Box = styled.div`
-  background-color: #eeeeee;
+  background-color: #171717;
   height: 100%;
   border-top-left-radius: 3%;
   border-top-right-radius: 3%;
@@ -77,17 +78,17 @@ export const Box = styled.div`
 `;
 
 export const Buttons = styled.div`
-  background-color: #eeeeee;
+  background-color: #171717;
   display: flex;
   justify-content: center;
   border-bottom-left-radius: 9px;
   border-bottom-right-radius: 9px;
-  border-top: 1px solid rgba(0, 0, 0, 0.6);
+  border-top: 1px solid #444444;
 
   button {
     margin: 0.8rem auto;
     padding: 1rem 4rem;
-    background-color: #efb7b7;
+    background-color: #bd4b4b;
     border-radius: 10px;
     cursor: pointer;
   }
