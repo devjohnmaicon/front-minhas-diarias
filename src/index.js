@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { GlobalContextProvider } from "./contexts/GlobalContext";
 import reportWebVitals from "./reportWebVitals";
+import "react-toastify/dist/ReactToastify.min.css";
 
 ReactDOM.render(
   <React.StrictMode>

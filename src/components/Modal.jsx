@@ -1,13 +1,13 @@
-import { type } from "@testing-library/user-event/dist/type";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Store } from "../contexts/GlobalContext";
+import { getDate, maskReal } from "../utils/inputMasks";
 
 const initialValues = {
   type: "1",
   value: 0,
-  date: "01/03/2022",
-  description: "",
+  user_id: "b24c471e-47cb-49a2-9ffa-aac10ce9fdb6",
+  date: `${getDate()}`,
 };
 
 export const Modal = ({ addDaily }) => {
@@ -51,7 +51,7 @@ export const Modal = ({ addDaily }) => {
           <input
             name="value"
             type="number"
-            placeholder="60,00"
+            placeholder="60"
             className="input-value"
             onChange={handleChange}
           />
@@ -60,11 +60,11 @@ export const Modal = ({ addDaily }) => {
           <label htmlFor="">Data</label>
           <input
             name="date"
-            type="text"
-            placeholder="Valor"
+            type="date"
+            placeholder="12/12/2012"
             className="input-value"
             value={daily.date}
-            disabled
+            onChange={handleChange}
           />
         </div>
 
