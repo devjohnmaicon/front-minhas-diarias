@@ -66,8 +66,8 @@ export const Headding = styled.div`
 export const Box = styled.div`
   background-color: #171717;
   height: 100%;
-  border-top-left-radius: 3%;
-  border-top-right-radius: 3%;
+  border-top-left-radius: 4%;
+  border-top-right-radius: 4%;
 
   overflow-y: scroll;
 

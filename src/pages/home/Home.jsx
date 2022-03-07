@@ -7,20 +7,20 @@ import { Store } from "../../contexts/GlobalContext";
 import { mock } from "../../utils/db";
 import { api } from "../../assets/api";
 import { toast } from "react-toastify";
+import sumDailies from "../../utils/sumDailies";
 
 export const Home = () => {
   const [dailies, setDailies] = useState([]);
-  console.log("dailies", dailies);
+  const [debit, setDebit] = useState(0);
 
-  const { state, dispatch, toggleModal } = Store();
+  const { state, toggleModal } = Store();
 
   const addDaily = async (daily) => {
-    console.log("add daily", daily);
-
     try {
       const { data } = await api.post("/createDaily", daily);
 
       setDailies([data, ...dailies]);
+      setDebit(() => debit + data.value);
 
       toast.success("Salvo com Sucesso !", {
         position: toast.POSITION.TOP_RIGHT,
@@ -38,7 +38,10 @@ export const Home = () => {
         (daily) => daily.user_id === "b24c471e-47cb-49a2-9ffa-aac10ce9fdb6"
       );
 
+      const sumTotal = sumDailies(filteredData);
+
       setDailies(filteredData);
+      setDebit(sumTotal);
     };
 
     getData();
@@ -50,8 +53,7 @@ export const Home = () => {
         <h3>Valor da divida</h3>
         <div className="box-heading">
           <sub>R$</sub>
-          {/* <span>{`${debit},00`}</span> */}
-          <span>500</span>
+          <span>{`${debit},00`}</span>
         </div>
       </Headding>
 
