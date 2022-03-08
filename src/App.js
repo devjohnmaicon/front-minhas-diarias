@@ -1,5 +1,7 @@
+import { Route, Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import GlobalStyle from "./GlobalStyles";
+import { AddDaily } from "./pages/Adddaily/AddDaily";
 import { Home } from "./pages/home/Home";
 
 function App() {
@@ -7,7 +9,13 @@ function App() {
     <div className="App">
       <GlobalStyle />
       <ToastContainer />
-      <Home />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="newDaily" element={<AddDaily />}>
+          <Route path=":id" element={<AddDaily />} />
+        </Route>
+      </Routes>
     </div>
   );
 }

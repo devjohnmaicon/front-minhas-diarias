@@ -85,7 +85,7 @@ export const Buttons = styled.div`
   border-bottom-right-radius: 9px;
   border-top: 1px solid #444444;
 
-  button {
+  .btn {
     margin: 0.8rem auto;
     padding: 1rem 4rem;
     background-color: #bd4b4b;

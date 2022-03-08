@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
 
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 1.2rem;
+  width: min-content;
 }
 
 *::-webkit-scrollbar-track {

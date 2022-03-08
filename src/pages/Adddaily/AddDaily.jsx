@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+
 import styled from "styled-components";
-import { Store } from "../contexts/GlobalContext";
-import { getDate, maskReal } from "../utils/inputMasks";
+import { StoreDailies } from "../../contexts/Dailies/DailiesContext";
+
+import { getDate } from "../../utils/inputMasks";
 
 const initialValues = {
   type: "1",
@@ -10,10 +13,16 @@ const initialValues = {
   date: `${getDate()}`,
 };
 
-export const Modal = ({ addDaily }) => {
+export const AddDaily = () => {
   const [daily, setDaily] = useState(initialValues);
+  const {
+    state: { debit },
+    dispatch,
+    addDaily,
+  } = StoreDailies();
+  const navigate = useNavigate();
 
-  const { toggleModal } = Store();
+  const { id } = useParams();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +39,7 @@ export const Modal = ({ addDaily }) => {
       ? addDaily({ ...daily, value: -daily.value })
       : addDaily(daily);
 
-    toggleModal();
+    navigate("/");
   };
 
   return (
@@ -83,9 +92,10 @@ export const Modal = ({ addDaily }) => {
           <button type="submit" className="btn-submit">
             Salvar
           </button>
-          <button type="button" className="btn-cancel" onClick={toggleModal}>
+
+          <Link className="btn-cancel" to={"/"}>
             Cancelar
-          </button>
+          </Link>
         </div>
       </Form>
     </ContainerModal>
