@@ -5,12 +5,16 @@ import { FaDiaspora } from "react-icons/fa";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { maskDate } from "../../utils/inputMasks";
 import { Store } from "../../contexts/GlobalContext";
+import { useNavigate } from "react-router-dom";
 
 export const Row = ({ dailie }) => {
-  const { toggleModal } = Store();
-  const { type, value, date } = dailie;
+  const { id, type, value, date } = dailie;
 
-  const handleEdition = () => {};
+  const navigate = useNavigate();
+
+  const handleEdition = () => {
+    navigate(`newDaily/${id}`);
+  };
 
   return (
     <TableRow className="row" type={type}>
@@ -32,9 +36,7 @@ export const Row = ({ dailie }) => {
       </td>
 
       <td className="arrow" align="center" onClick={handleEdition}>
-        <button>
-          <MdOutlineKeyboardArrowDown size={"1.2rem"} />
-        </button>
+        <MdOutlineKeyboardArrowDown size={"1.2rem"} />
       </td>
     </TableRow>
   );

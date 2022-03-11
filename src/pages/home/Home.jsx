@@ -12,6 +12,8 @@ export const Home = () => {
     dispatch,
   } = StoreDailies();
 
+  console.log("dailies", dailies);
+
   return (
     <AppContainer>
       <Headding>

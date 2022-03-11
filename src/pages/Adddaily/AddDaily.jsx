@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import styled from "styled-components";
+import { api } from "../../assets/api";
 import { StoreDailies } from "../../contexts/Dailies/DailiesContext";
 
 import { getDate } from "../../utils/inputMasks";
@@ -15,10 +16,12 @@ const initialValues = {
 
 export const AddDaily = () => {
   const [daily, setDaily] = useState(initialValues);
+
   const {
     state: { debit },
     dispatch,
     addDaily,
+    updateDaily,
   } = StoreDailies();
   const navigate = useNavigate();
 
@@ -35,12 +38,28 @@ export const AddDaily = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    daily.type === "2"
-      ? addDaily({ ...daily, value: -daily.value })
-      : addDaily(daily);
+    const addID = { id, ...daily };
+
+    // daily.type === "2"
+    //   ? addDaily({ ...daily, value: -daily.value })
+    //   : addDaily(daily);
+
+    updateDaily(addID);
 
     navigate("/");
   };
+
+  useEffect(() => {
+    const getDaily = async () => {
+      const { data } = await api.post("/getDaily", id);
+
+      console.log(data);
+
+      setDaily(data);
+    };
+
+    getDaily();
+  }, []);
 
   return (
     <ContainerModal>
@@ -62,6 +81,7 @@ export const AddDaily = () => {
             type="number"
             placeholder="60"
             className="input-value"
+            value={daily.value}
             onChange={handleChange}
           />
         </div>

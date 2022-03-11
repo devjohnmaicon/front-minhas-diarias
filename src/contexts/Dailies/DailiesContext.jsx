@@ -14,6 +14,20 @@ const INITIAL_STATE = {
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "UPDATE_DAILIES": {
+      const listDailies = state.dailies;
+
+      listDailies.map((daily) => {
+        if (daily.id == action.payload.id) {
+          daily.type = action.payload.type;
+          daily.date = action.payload.date;
+          daily.value = action.payload.value;
+        }
+      });
+
+      return { ...state, dailies: [...listDailies] };
+    }
+
     case "SET_DAILIES":
       return { ...state, dailies: [action.payload, ...state.dailies] };
 
@@ -46,6 +60,21 @@ export const DailiesContextProvider = ({ children }) => {
     }
   };
 
+  const updateDaily = async (daily) => {
+    try {
+      const { data } = await api.post("/updateDaily", daily);
+
+      dispatch({ type: "SET_DAILIES", payload: data });
+      dispatch({ type: "SET_DEBIT", payload: state.debit + data.value });
+
+      toast.success("Salvo com Sucesso !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     const getData = async () => {
       const { data } = await api.get("/getDailies");
@@ -64,7 +93,7 @@ export const DailiesContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <DailiesContext.Provider value={{ state, dispatch, addDaily }}>
+    <DailiesContext.Provider value={{ state, dispatch, addDaily,updateDaily }}>
       {children}
     </DailiesContext.Provider>
   );
