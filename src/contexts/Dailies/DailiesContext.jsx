@@ -1,9 +1,7 @@
+import { createContext, useContext, useReducer, useEffect } from "react";
 import { toast } from "react-toastify";
 
 import { api } from "../../assets/api";
-import sumDailies from "../../utils/sumDailies";
-
-const { createContext, useContext, useReducer, useEffect } = require("react");
 
 export const DailiesContext = createContext();
 
@@ -14,24 +12,7 @@ const INITIAL_STATE = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "UPDATE_DAILIES": {
-      const listDailies = state.dailies;
-
-      listDailies.map((daily) => {
-        if (daily.id == action.payload.id) {
-          daily.type = action.payload.type;
-          daily.date = action.payload.date;
-          daily.value = action.payload.value;
-        }
-      });
-
-      return { ...state, dailies: [...listDailies] };
-    }
-
     case "SET_DAILIES":
-      return { ...state, dailies: [action.payload, ...state.dailies] };
-
-    case "GET_DAILIES":
       return { ...state, dailies: action.payload };
 
     case "SET_DEBIT":
@@ -47,14 +28,13 @@ export const DailiesContextProvider = ({ children }) => {
 
   const addDaily = async (daily) => {
     try {
-      const { data } = await api.post("/createDaily", daily);
-
-      dispatch({ type: "SET_DAILIES", payload: data });
-      dispatch({ type: "SET_DEBIT", payload: state.debit + data.value });
+      await api.post("/createDaily", daily);
 
       toast.success("Salvo com Sucesso !", {
         position: toast.POSITION.TOP_RIGHT,
       });
+
+      getData();
     } catch (e) {
       console.log(e);
     }
@@ -62,38 +42,43 @@ export const DailiesContextProvider = ({ children }) => {
 
   const updateDaily = async (daily) => {
     try {
-      const { data } = await api.post("/updateDaily", daily);
-
-      dispatch({ type: "SET_DAILIES", payload: data });
-      dispatch({ type: "SET_DEBIT", payload: state.debit + data.value });
+      await api.put("/updateDaily", daily);
 
       toast.success("Salvo com Sucesso !", {
         position: toast.POSITION.TOP_RIGHT,
       });
+
+      getData();
     } catch (e) {
       console.log(e);
     }
   };
 
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await api.get("/getDailies");
+  const getData = async () => {
+    const { data } = await api.get("/getDailies");
 
-      const filteredData = data.filter(
-        (daily) => daily.user_id === "b24c471e-47cb-49a2-9ffa-aac10ce9fdb6"
-      );
+    const filteredData = data.filter(
+      (daily) => daily.user_id === "b24c471e-47cb-49a2-9ffa-aac10ce9fdb6"
+    );
 
-      const sumTotal = sumDailies(filteredData);
+    const sumTotal = filteredData
+      .map((daily) => {
+        if (daily.type == "2") {
+          return -daily.value;
+        }
 
-      dispatch({ type: "GET_DAILIES", payload: filteredData });
-      dispatch({ type: "SET_DEBIT", payload: sumTotal });
-    };
+        return daily.value;
+      })
+      .reduce((prev, current) => prev + current);
 
-    getData();
-  }, []);
+    dispatch({ type: "SET_DAILIES", payload: filteredData });
+    dispatch({ type: "SET_DEBIT", payload: sumTotal });
+  };
 
   return (
-    <DailiesContext.Provider value={{ state, dispatch, addDaily,updateDaily }}>
+    <DailiesContext.Provider
+      value={{ state, dispatch, getData, addDaily, updateDaily }}
+    >
       {children}
     </DailiesContext.Provider>
   );

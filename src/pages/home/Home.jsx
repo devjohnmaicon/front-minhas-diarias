@@ -1,18 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Row } from "./Row";
 import { AppContainer, Box, Buttons, Headding } from "./styleHome";
 import { BsPlusLg } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
 import { StoreDailies } from "../../contexts/Dailies/DailiesContext";
+import { Loading } from "../../components/Loading";
 
 export const Home = () => {
   const {
     state: { debit, dailies },
     dispatch,
+    getData,
   } = StoreDailies();
 
   console.log("dailies", dailies);
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <AppContainer>

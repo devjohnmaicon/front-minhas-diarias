@@ -4,7 +4,6 @@ import { FiDollarSign } from "react-icons/fi";
 import { FaDiaspora } from "react-icons/fa";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { maskDate } from "../../utils/inputMasks";
-import { Store } from "../../contexts/GlobalContext";
 import { useNavigate } from "react-router-dom";
 
 export const Row = ({ dailie }) => {
@@ -17,7 +16,7 @@ export const Row = ({ dailie }) => {
   };
 
   return (
-    <TableRow className="row" type={type}>
+    <TableRow className="row" type={type} onClick={handleEdition}>
       <td className="icon" align="center">
         {type == "1" ? (
           <FaDiaspora />
@@ -32,10 +31,12 @@ export const Row = ({ dailie }) => {
       </td>
 
       <td>
-        <span className="value">{`R$ ${value},00`}</span>
+        <span className="value">
+          {type == 2 ? `- R$ ${value},00` : `R$ ${value},00`}
+        </span>
       </td>
 
-      <td className="arrow" align="center" onClick={handleEdition}>
+      <td className="arrow" align="center">
         <MdOutlineKeyboardArrowDown size={"1.2rem"} />
       </td>
     </TableRow>

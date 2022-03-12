@@ -2,8 +2,10 @@ export const getDate = () => {
   const today = new Date();
 
   return `${today.getFullYear()}-${
-    today.getMonth() < 10 ? `0${today.getMonth() + 1}` : today.getMonth() + 1
-  }-${today.getDay() < 10 ? `0${today.getDay() + 6}` : today.getDay() + 6}`;
+    today.getMonth() + 1 < 10
+      ? `0${today.getMonth() + 1}`
+      : today.getMonth() + 1
+  }-${today.getDay() + 6 < 10 ? `0${today.getDay() + 6}` : today.getDay() + 6}`;
 };
 
 export const maskDate = (date) => {

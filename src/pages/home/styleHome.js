@@ -4,23 +4,24 @@ export const AppContainer = styled.div`
   /* border: 2px solid #efb7b7; */
   border-radius: 10px;
   height: 100%;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   margin: 0 auto;
   max-width: 768px;
 
   position: relative;
   color: #ededed;
-
-  @media screen and (min-width: 768px) {
-    height: 95%;
-    margin: 1.5rem auto;
-  }
 `;
 
 export const Headding = styled.div`
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   h3 {
     color: #fff;
@@ -32,7 +33,10 @@ export const Headding = styled.div`
     background-color: #bd4b4b;
     border-radius: 15px;
     margin-top: 0.5rem;
-    padding: 1rem;
+    padding: 1.4rem;
+
+    width: 100%;
+    max-width: 425px;
 
     display: flex;
     justify-content: center;
@@ -47,18 +51,6 @@ export const Headding = styled.div`
       color: #000;
       font-weight: bold;
       font-size: 2.5rem;
-    }
-  }
-
-  @media screen and (min-width: 768px) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    .box-heading {
-      margin-top: 1rem;
-      padding: 1.5rem 2.5rem;
     }
   }
 `;

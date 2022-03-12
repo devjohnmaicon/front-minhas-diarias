@@ -2,16 +2,10 @@ const { createContext, useContext, useReducer, useEffect } = require("react");
 
 export const GlobalContext = createContext();
 
-const INITIAL_STATE = {
-  loading: false,
-  modal: false,
-};
+const INITIAL_STATE = {};
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "TOGGLE_MODAL":
-      return { ...state, modal: !state.modal };
-
     default:
       return state;
   }
@@ -24,8 +18,14 @@ export const GlobalContextProvider = ({ children }) => {
     dispatch({ type: "TOGGLE_MODAL" });
   };
 
+  const toggleLoading = () => {
+    dispatch({ type: "TOGGLE_LOADING" });
+  };
+
   return (
-    <GlobalContext.Provider value={{ state, dispatch, toggleModal }}>
+    <GlobalContext.Provider
+      value={{ state, dispatch, toggleModal, toggleLoading }}
+    >
       {children}
     </GlobalContext.Provider>
   );

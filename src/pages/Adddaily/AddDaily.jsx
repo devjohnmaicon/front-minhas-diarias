@@ -9,7 +9,7 @@ import { getDate } from "../../utils/inputMasks";
 
 const initialValues = {
   type: "1",
-  value: 0,
+  value: "",
   user_id: "b24c471e-47cb-49a2-9ffa-aac10ce9fdb6",
   date: `${getDate()}`,
 };
@@ -17,12 +17,7 @@ const initialValues = {
 export const AddDaily = () => {
   const [daily, setDaily] = useState(initialValues);
 
-  const {
-    state: { debit },
-    dispatch,
-    addDaily,
-    updateDaily,
-  } = StoreDailies();
+  const { addDaily, updateDaily } = StoreDailies();
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -30,41 +25,36 @@ export const AddDaily = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    name === "value"
-      ? setDaily({ ...daily, [name]: parseFloat(value) })
-      : setDaily({ ...daily, [name]: value });
+    setDaily({ ...daily, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const addID = { id, ...daily };
+    const dailywithID = { id, ...daily };
 
-    // daily.type === "2"
-    //   ? addDaily({ ...daily, value: -daily.value })
-    //   : addDaily(daily);
-
-    updateDaily(addID);
+    id ? updateDaily(dailywithID) : addDaily(daily);
 
     navigate("/");
   };
 
   useEffect(() => {
     const getDaily = async () => {
-      const { data } = await api.post("/getDaily", id);
+      const { data } = await api.post("/getDaily", {
+        id: id,
+      });
 
-      console.log(data);
 
       setDaily(data);
     };
 
-    getDaily();
+    id && getDaily();
   }, []);
 
   return (
     <ContainerModal>
       <Form onSubmit={handleSubmit}>
-        <h2>Novo Lançamento</h2>
+        <h2>{id ? "Editar Diária" : "Novo Lançamento"}</h2>
 
         <div className="box-form">
           <label htmlFor="">Tipo</label>
@@ -90,7 +80,6 @@ export const AddDaily = () => {
           <input
             name="date"
             type="date"
-            placeholder="12/12/2012"
             className="input-value"
             value={daily.date}
             onChange={handleChange}
@@ -200,10 +189,14 @@ export const Form = styled.form`
     }
 
     .btn-cancel {
-      background-color: transparent;
       cursor: pointer;
+      background-color: transparent;
+
       font-size: 1rem;
       color: #fff;
+
+      display: flex;
+      align-items: center;
     }
   }
 `;
