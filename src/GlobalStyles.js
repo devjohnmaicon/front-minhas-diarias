@@ -9,6 +9,11 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
     border: none;
     font-family: sans-serif;
+    
+    a{
+         text-decoration: none;
+
+     }
 }
 
 .App{
