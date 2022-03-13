@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Row } from "./Row";
-import { AppContainer, Box, Buttons, Headding } from "./styleHome";
+import { AppContainer, Box, Buttons, Headding, Header } from "./styleHome";
 import { BsPlusLg } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
@@ -22,11 +22,19 @@ export const Home = () => {
 
   return (
     <AppContainer>
+      <Header>
+        <div className="user-name">
+          <span>Kamila</span>
+        </div>
+        <div className="user-profile">
+          <img src={require("../../assets/images/profile.png")} alt="" />
+        </div>
+      </Header>
+
       <Headding>
         <h3>Valor da divida</h3>
         <div className="box-heading">
-          <sub>R$</sub>
-          <span>{`${debit},00`}</span>
+          <span>{`R$ ${debit},00`}</span>
         </div>
       </Headding>
 

@@ -19,20 +19,20 @@ export const Row = ({ dailie }) => {
     <TableRow className="row" type={type} onClick={handleEdition}>
       <td className="icon" align="center">
         {type == "1" ? (
-          <FaDiaspora />
+          <FaDiaspora size={"1.4rem"} />
         ) : (
-          <FiDollarSign size={"1.4rem"} color="#4E9F3D" />
+          <FiDollarSign size={"1.5rem"} />
         )}
       </td>
 
-      <td className="info" align="center">
-        <span>{maskDate(date)}</span>
+      <td className="info" align="left">
         <p>{type == "1" ? "Diária" : "Pagamento"}</p>
+        <span>{maskDate(date)}</span>
       </td>
 
       <td>
         <span className="value">
-          {type == 2 ? `- R$ ${value},00` : `R$ ${value},00`}
+          {`${type == 2 ? "-" : "+"} R$ ${value},00`}
         </span>
       </td>
 
@@ -48,7 +48,6 @@ const TableRow = styled.tr`
   align-items: center;
   justify-content: space-around;
   padding: 0.4rem 0;
-  border-bottom: 1px solid none;
 
   h3 {
     color: #000;
@@ -58,7 +57,6 @@ const TableRow = styled.tr`
 
   :first-child {
     filter: brightness(1);
-    border-bottom: 1px solid ${(props) => (props.type === "1" ? "" : "#4E9F3D")};
     margin: 0.4rem 0;
   }
 
@@ -75,18 +73,16 @@ const TableRow = styled.tr`
   .info {
     flex: 3;
 
-    span,
     p {
-      color: ${(props) => (props.type === "1" ? "" : "#4E9F3D")};
+      color: #EEEEEE;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      padding-bottom: 0.4rem;
     }
 
     span {
-      font-weight: 100;
-    }
-
-    p {
-      margin-top: 0.2rem;
-      font-weight: bolder;
+      font-weight: 300;
+      color: #b2b1b9;
     }
   }
 
@@ -95,10 +91,11 @@ const TableRow = styled.tr`
 
     font-weight: 600;
     font-size: 1.2rem;
-    color: ${(props) => (props.type === "1" ? "" : "#4E9F3D")};
+    color: ${(props) => (props.type === "1" ? "" : "#7BC74D")};
   }
 
   .arrow {
+    cursor: pointer;
     flex: 1;
 
     button {

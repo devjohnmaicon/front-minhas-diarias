@@ -44,7 +44,6 @@ export const AddDaily = () => {
         id: id,
       });
 
-
       setDaily(data);
     };
 
@@ -112,16 +111,14 @@ export const AddDaily = () => {
 };
 
 export const ContainerModal = styled.div`
-  background-color: rgba(0, 0, 0, 0.6);
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
+
+  height: 100%;
+  max-width: 768px;
+
+  margin: 0 auto;
 `;
 
 export const Form = styled.form`
@@ -140,16 +137,18 @@ export const Form = styled.form`
   padding: 1.4rem 1rem 0;
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    color: #fff;
   }
 
   .box-form {
     display: flex;
     flex-direction: column;
-    margin-top: 0.8rem;
 
     label {
       margin-bottom: 0.4rem;
+      color: #fff;
+      font-weight: 300;
     }
 
     select {
