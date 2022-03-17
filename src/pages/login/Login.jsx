@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
+import { Store } from "../../contexts/auth/AuthContext";
 
 export const Login = () => {
   const [credentials, setCredentials] = useState({});
+
+  const { state, handleLogin } = Store();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -11,7 +16,15 @@ export const Login = () => {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const status = await handleLogin(credentials);
+
+    if (status === 200) {
+      navigate("/home");
+    }
+
+  };
 
   return (
     <Container>
@@ -34,7 +47,7 @@ export const Login = () => {
 
         <div className="box-form">
           <input
-            name="senha"
+            name="password"
             type="password"
             placeholder="Password"
             // value={daily.value}

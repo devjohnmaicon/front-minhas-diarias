@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import styled from "styled-components";
 import { api } from "../../assets/api";
-import { StoreDailies } from "../../contexts/Dailies/DailiesContext";
 
 import { getDate } from "../../utils/inputMasks";
 
@@ -17,7 +16,6 @@ const initialValues = {
 export const AddDaily = () => {
   const [daily, setDaily] = useState(initialValues);
 
-  const { addDaily, updateDaily } = StoreDailies();
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -33,7 +31,7 @@ export const AddDaily = () => {
 
     const dailywithID = { id, ...daily };
 
-    id ? updateDaily(dailywithID) : addDaily(daily);
+    // id ? updateDaily(dailywithID) : addDaily(daily);
 
     navigate("/");
   };

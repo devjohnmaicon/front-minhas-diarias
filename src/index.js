@@ -1,21 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { GlobalContextProvider } from "./contexts/GlobalContext";
 import reportWebVitals from "./reportWebVitals";
 import "react-toastify/dist/ReactToastify.min.css";
 import { BrowserRouter } from "react-router-dom";
-import { DailiesContextProvider } from "./contexts/Dailies/DailiesContext";
+import { AuthContextProvider } from "./contexts/auth/AuthContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalContextProvider>
-      <DailiesContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </DailiesContextProvider>
-    </GlobalContextProvider>
+    <BrowserRouter>
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

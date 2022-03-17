@@ -1,27 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Row } from "./Row";
 import { AppContainer, Box, Buttons, Headding, Header } from "./styleHome";
 import { BsPlusLg } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
-import { StoreDailies } from "../../contexts/Dailies/DailiesContext";
 import { Loading } from "../../components/Loading";
+import { api } from "../../assets/api";
+import { Store } from "../../contexts/auth/AuthContext";
 
 export const Home = () => {
-  const {
-    state: { debit, dailies },
-    dispatch,
-    getData,
-  } = StoreDailies();
+  const { user_id, toggleLoading } = Store();
 
-  console.log("dailies", dailies);
+  const [dailies, setDailies] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  console.log("xxx", user_id);
 
   useEffect(() => {
-    getData();
+    const user_id_localS = localStorage.getItem("user_id");
+
+    const getDailies = async () => {
+      setLoading(true);
+      const { data } = await api.post("/getDailies", {
+        user_id: user_id ? user_id : user_id_localS,
+      });
+
+      setDailies(data);
+      setLoading(false);
+    };
+
+    getDailies();
   }, []);
 
   return (
     <AppContainer>
+      {loading && <Loading />}
+
       <Header>
         <div className="user-name">
           <span>Kamila</span>
@@ -34,7 +48,7 @@ export const Home = () => {
       <Headding>
         <h3>Valor da divida</h3>
         <div className="box-heading">
-          <span>{`R$ ${debit},00`}</span>
+          <span>{`R$ 100,00`}</span>
         </div>
       </Headding>
 
