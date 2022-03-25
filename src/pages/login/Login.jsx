@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
-import { Store } from "../../contexts/auth/AuthContext";
 
 export const Login = () => {
+  const dispatch = useDispatch();
+
   const [credentials, setCredentials] = useState({});
 
-  const { state, handleLogin } = Store();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -18,19 +19,13 @@ export const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const status = await handleLogin(credentials);
-
-    if (status === 200) {
-      navigate("/home");
-    }
-
   };
 
   return (
     <Container>
       <Top>
         <div className="logo">
-          <img src={require("../../assets/images/logo.png")} alt="" />
+          <h2>MY DAILY</h2>
         </div>
       </Top>
 
@@ -84,18 +79,13 @@ export const Top = styled.div`
   align-items: center;
 
   .logo {
-    height: 300px;
-    width: 300px;
-    margin-bottom: 1rem;
-    img {
-      height: 100%;
-      width: 100%;
-    }
-  }
+    padding: 1rem 0;
 
-  h2 {
-    font-size: 2rem;
-    color: #eeeeee;
+    h2 {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #eeeeee;
+    }
   }
 `;
 

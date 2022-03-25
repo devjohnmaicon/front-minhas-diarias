@@ -5,18 +5,27 @@ import { FaDiaspora } from "react-icons/fa";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { maskDate } from "../../utils/inputMasks";
 import { useNavigate } from "react-router-dom";
+import {
+  handleEdition,
+  openEdition,
+  setDailyEdition,
+  toggleModal,
+} from "../../redux/features/dailies";
+import { useDispatch } from "react-redux";
 
-export const Row = ({ dailie }) => {
-  const { id, type, value, date } = dailie;
+export const Row = ({ daily }) => {
+  const { id, type, value, date } = daily;
 
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleEdition = () => {
-    navigate(`newDaily/${id}`);
+  const openEdit = () => {
+    dispatch(toggleModal(true));
+
+    dispatch(setDailyEdition(daily));
   };
 
   return (
-    <TableRow className="row" type={type} onClick={handleEdition}>
+    <TableRow className="row" type={type} onClick={openEdit}>
       <td className="icon" align="center">
         {type == "1" ? (
           <FaDiaspora size={"1.4rem"} />
@@ -27,7 +36,7 @@ export const Row = ({ dailie }) => {
 
       <td className="info" align="left">
         <p>{type == "1" ? "Diária" : "Pagamento"}</p>
-        <span>{maskDate(date)}</span>
+        {/* <span>{maskDate(date)}</span> */}
       </td>
 
       <td>
@@ -74,7 +83,7 @@ const TableRow = styled.tr`
     flex: 3;
 
     p {
-      color: #EEEEEE;
+      color: #eeeeee;
       font-weight: 600;
       margin-bottom: 0.2rem;
       padding-bottom: 0.4rem;

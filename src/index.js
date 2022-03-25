@@ -4,14 +4,15 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "react-toastify/dist/ReactToastify.min.css";
 import { BrowserRouter } from "react-router-dom";
-import { AuthContextProvider } from "./contexts/auth/AuthContext";
+import { Provider } from "react-redux";
+import store from "./redux/configureStore";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthContextProvider>
-        <App />
-      </AuthContextProvider>
+      <Provider store={store}>
+          <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

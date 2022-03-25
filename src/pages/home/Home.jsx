@@ -3,38 +3,25 @@ import { Row } from "./Row";
 import { AppContainer, Box, Buttons, Headding, Header } from "./styleHome";
 import { BsPlusLg } from "react-icons/bs";
 
-import { Link } from "react-router-dom";
 import { Loading } from "../../components/Loading";
-import { api } from "../../assets/api";
-import { Store } from "../../contexts/auth/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { getDailies, toggleModal } from "../../redux/features/dailies";
+import { AddDaily } from "../../components/AddDaily";
 
 export const Home = () => {
-  const { user_id, toggleLoading } = Store();
+  const dispatch = useDispatch();
 
-  const [dailies, setDailies] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  console.log("xxx", user_id);
+  const { user_id } = useSelector((state) => state.login);
+  const { data, debt, modal, loading } = useSelector((state) => state.dailies);
 
   useEffect(() => {
-    const user_id_localS = localStorage.getItem("user_id");
-
-    const getDailies = async () => {
-      setLoading(true);
-      const { data } = await api.post("/getDailies", {
-        user_id: user_id ? user_id : user_id_localS,
-      });
-
-      setDailies(data);
-      setLoading(false);
-    };
-
-    getDailies();
+    dispatch(getDailies(user_id));
   }, []);
 
   return (
     <AppContainer>
       {loading && <Loading />}
+      {modal && <AddDaily />}
 
       <Header>
         <div className="user-name">
@@ -48,15 +35,15 @@ export const Home = () => {
       <Headding>
         <h3>Valor da divida</h3>
         <div className="box-heading">
-          <span>{`R$ 100,00`}</span>
+          <span>{`R$ ${debt},00`}</span>
         </div>
       </Headding>
 
       <Box>
         <table>
           <tbody>
-            {dailies.length ? (
-              dailies.map((dailie) => <Row dailie={dailie} key={dailie.id} />)
+            {data?.length ? (
+              data?.map((daily) => <Row daily={daily} key={daily.id} />)
             ) : (
               <tr
                 style={{
@@ -75,9 +62,9 @@ export const Home = () => {
       </Box>
 
       <Buttons>
-        <Link to={"/newDaily"} className="btn">
+        <a className="btn" onClick={() => dispatch(toggleModal(true))}>
           <BsPlusLg size={"1.2rem"} color="#EDEDED" />
-        </Link>
+        </a>
       </Buttons>
     </AppContainer>
   );

@@ -1,57 +1,61 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import styled from "styled-components";
-import { api } from "../../assets/api";
+import { api } from "../assets/api";
+import {
+  clearDailyEdition,
+  closeEdition,
+  createDaily,
+  toggleModal,
+  updateDaily,
+} from "../redux/features/dailies";
 
-import { getDate } from "../../utils/inputMasks";
+import { getDate } from "../utils/inputMasks";
 
-const initialValues = {
-  type: "1",
-  value: "",
-  user_id: "b24c471e-47cb-49a2-9ffa-aac10ce9fdb6",
-  date: `${getDate()}`,
-};
+export const AddDaily = ({ openModal, closeModal }) => {
+  const dispatch = useDispatch();
 
-export const AddDaily = () => {
-  const [daily, setDaily] = useState(initialValues);
+  const { user_id } = useSelector((state) => state.login);
+  const { edit, dailyEdit } = useSelector((state) => state.dailies.edition);
 
-  const navigate = useNavigate();
-
-  const { id } = useParams();
+  const [daily, setDaily] = useState({
+    type: "1",
+    value: "",
+    user_id: user_id,
+    date: `${getDate()}`,
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setDaily({ ...daily, [name]: value });
+    name === "value"
+      ? setDaily({ ...daily, [name]: parseFloat(value) })
+      : setDaily({ ...daily, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const dailywithID = { id, ...daily };
+    edit ? dispatch(updateDaily(daily)) : dispatch(createDaily(daily));
 
-    // id ? updateDaily(dailywithID) : addDaily(daily);
+    close();
+  };
 
-    navigate("/");
+  const close = () => {
+    dispatch(toggleModal(false));
+    edit && dispatch(clearDailyEdition());
   };
 
   useEffect(() => {
-    const getDaily = async () => {
-      const { data } = await api.post("/getDaily", {
-        id: id,
-      });
-
-      setDaily(data);
-    };
-
-    id && getDaily();
+    edit && setDaily(dailyEdit);
   }, []);
 
   return (
     <ContainerModal>
       <Form onSubmit={handleSubmit}>
-        <h2>{id ? "Editar Diária" : "Novo Lançamento"}</h2>
+        <h2>{edit ? "Editar Diária" : "Novo Lançamento"}</h2>
 
         <div className="box-form">
           <label htmlFor="">Tipo</label>
@@ -99,9 +103,9 @@ export const AddDaily = () => {
             Salvar
           </button>
 
-          <Link className="btn-cancel" to={"/"}>
+          <button className="btn-cancel" onClick={close}>
             Cancelar
-          </Link>
+          </button>
         </div>
       </Form>
     </ContainerModal>
@@ -109,24 +113,29 @@ export const AddDaily = () => {
 };
 
 export const ContainerModal = styled.div`
+  background-color: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  z-index: 2;
+
   display: flex;
   align-items: center;
   justify-content: center;
-
-  height: 100%;
-  max-width: 768px;
-
-  margin: 0 auto;
 `;
 
 export const Form = styled.form`
   background-color: #171717;
-  height: 95%;
-  width: 70%;
   min-height: 500px;
   min-width: 300px;
   border-radius: 2%;
   box-shadow: 0px 10px 13px -7px #000000;
+
+  height: 90%;
+  width: 80%;
 
   display: flex;
   flex-direction: column;
