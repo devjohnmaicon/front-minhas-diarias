@@ -33,11 +33,19 @@ export const signIn = (credentials) => async (dispatch) => {
     const { data } = await api.post("/login", credentials);
 
     dispatch(login(data));
+
+    window.localStorage.setItem("user", JSON.stringify(data));
   } catch (e) {
-    toast.error("Email e Password são obrigatorios !", {
+    dispatch(errorLogin(e.message));
+
+    toast.error("Email e  Password, são obrigatórios !", {
       position: toast.POSITION.TOP_RIGHT,
     });
+  }
+};
 
-    dispatch(errorLogin(e.message));
+export const autoLogin = (hasLoged) => async (dispatch, getState) => {
+  if (hasLoged) {
+    dispatch(login(hasLoged));
   }
 };

@@ -3,17 +3,18 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
-import { signIn } from "../../redux/features/login";
+import { autoLogin, signIn } from "../../redux/features/login";
+
+const INITIAL_STATE = {
+  email: "",
+  password: "",
+};
 
 export const Login = () => {
   const dispatch = useDispatch();
 
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
-  });
+  const [credentials, setCredentials] = useState(INITIAL_STATE);
 
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,8 +27,15 @@ export const Login = () => {
 
     dispatch(signIn(credentials));
 
-    navigate("/home");
+    setCredentials(INITIAL_STATE);
+
   };
+
+  useEffect(() => {
+    const hasLoged = JSON.parse(localStorage.getItem("user"));
+
+    dispatch(autoLogin(hasLoged));
+  }, []);
 
   return (
     <Container>

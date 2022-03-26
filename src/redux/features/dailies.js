@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import { api } from "../../assets/api";
 import { calculateDebit, sumDebit } from "../../utils/calculateDebit";
 
@@ -116,8 +117,16 @@ export const createDaily = (daily) => async (dispatch) => {
     dispatch(handleDebt(type == "2" ? -value : value));
 
     dispatch(newDaily(data));
+
+    toast.success("Salvo com sucesso.", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
   } catch (error) {
     dispatch(fetchError(error.message));
+
+    toast.error("Erro ao adicionar diária.", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
   }
 };
 
@@ -126,8 +135,16 @@ export const updateDaily = (daily) => async (dispatch) => {
     const { data } = await api.put("/updateDaily", daily);
 
     dispatch(update(data));
+
+    toast.info("Atualizado com sucesso.", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
   } catch (error) {
     dispatch(fetchError(error.message));
+
+    toast.error("Erro ao editar diária.", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
   }
 };
 
