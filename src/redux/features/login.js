@@ -38,10 +38,12 @@ export default loginSlice.reducer;
 export const signIn = (credentials) => async (dispatch) => {
   try {
     const { data } = await api.post("/login", credentials);
+    api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
 
     dispatch(login(data));
 
     window.localStorage.setItem("user", JSON.stringify(data));
+
   } catch (e) {
     dispatch(errorLogin(e.message));
 
@@ -54,5 +56,7 @@ export const signIn = (credentials) => async (dispatch) => {
 export const autoLogin = (hasLoged) => async (dispatch, getState) => {
   if (hasLoged) {
     dispatch(login(hasLoged));
+    api.defaults.headers.common['Authorization'] = `Bearer ${hasLoged.token}`;
+
   }
 };

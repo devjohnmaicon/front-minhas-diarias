@@ -64,7 +64,7 @@ export const AddDaily = ({ openModal, closeModal }) => {
 
   return (
     <ContainerModal>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="menu-config animate__animated animate__fadeInUp">
         <h2>{edit ? "Editar Diária" : "Novo Lançamento"}</h2>
 
         <div className="box-form">
