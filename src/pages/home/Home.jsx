@@ -41,8 +41,8 @@ export const Home = () => {
       {loading && <Loading />}
       {modal && <AddDaily />}
 
-      <Header>
-        <div className="user-name">
+      <Header> 
+        <div className="user-name"> 
           <span>{user_name}</span>
         </div>
 
@@ -60,7 +60,9 @@ export const Home = () => {
       </Header>
 
       <Headding>
-        <h3>Valor da divida</h3>
+        <div className="title-heading">
+          <h3>Valor da divida</h3>
+        </div>
         <div className="box-heading animate__animated animate__fadeInDown">
           <span>{`R$ ${debt},00`}</span>
         </div>

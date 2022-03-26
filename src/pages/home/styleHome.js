@@ -51,7 +51,7 @@ export const Header = styled.header`
       width: 5rem;
 
       border-radius: 5px;
-      padding: 0.5rem;
+      padding: 0.4rem;
 
       margin: 5px;
 
@@ -77,10 +77,20 @@ export const Headding = styled.div`
 
   margin-bottom: 1rem;
 
-  h3 {
-    color: #eeeeee;
-    font-size: 1.3rem;
-    font-weight: bolder;
+  .title-heading {
+    margin: 0 auto;
+    width: 94%;
+
+    h3 {
+      color: #eeeeee;
+      font-size: 1.3rem;
+      font-weight: bolder;
+      text-align: start;
+    }
+
+    @media screen and (min-width: 425px) {
+      width: 24rem;
+    }
   }
 
   .box-heading {
