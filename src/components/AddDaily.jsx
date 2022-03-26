@@ -12,13 +12,13 @@ import {
 } from "../redux/features/dailies";
 
 import { getDate } from "../utils/inputMasks";
+import { toast } from "react-toastify";
 
 export const AddDaily = ({ openModal, closeModal }) => {
   const dispatch = useDispatch();
 
   const { user_id } = useSelector((state) => state.login);
   const { edit, dailyEdit } = useSelector((state) => state.dailies.edition);
-
 
   const [daily, setDaily] = useState({
     type: "1",
@@ -37,6 +37,16 @@ export const AddDaily = ({ openModal, closeModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    let formErros = false;
+
+    if (daily.value == "" || daily.value < 0) {
+      formErros = true;
+      toast.error("Preencha o campo valor.");
+      return;
+    }
+
+    if (formErros) return;
 
     edit ? dispatch(updateDaily(daily)) : dispatch(createDaily(daily));
 
@@ -93,6 +103,7 @@ export const AddDaily = ({ openModal, closeModal }) => {
             name="description"
             cols="30"
             rows="6"
+            placeholder="** OPCIONAL **"
             className="input-text_area"
             onChange={handleChange}
           />

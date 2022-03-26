@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import styled from "styled-components";
 import { autoLogin, signIn } from "../../redux/features/login";
@@ -26,6 +27,16 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    let formErros = false;
+
+    if (credentials.email == "" || credentials.password == "") {
+      formErros = true;
+      toast.error("Email e senha são obrigatórios.");
+      return;
+    }
+
+    if (formErros) return;
+
     dispatch(signIn(credentials));
 
     setCredentials(INITIAL_STATE);
@@ -47,10 +58,7 @@ export const Login = () => {
         </div>
       </Top>
 
-      <Form
-        onSubmit={handleSubmit}
-        
-      >
+      <Form onSubmit={handleSubmit}>
         <div className="box-form">
           <input
             name="email"
@@ -65,7 +73,7 @@ export const Login = () => {
           <input
             name="password"
             type="password"
-            placeholder="Password"
+            placeholder="Senha"
             value={credentials.password}
             onChange={handleChange}
           />

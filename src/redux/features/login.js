@@ -45,7 +45,7 @@ export const signIn = (credentials) => async (dispatch) => {
   } catch (e) {
     dispatch(errorLogin(e.message));
 
-    toast.error("Email e  Password, são obrigatórios !", {
+    toast.error("Credenciais inválidas !", {
       position: toast.POSITION.TOP_RIGHT,
     });
   }
