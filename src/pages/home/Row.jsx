@@ -1,17 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import styled from "styled-components";
 import { FiDollarSign } from "react-icons/fi";
 import { FaDiaspora } from "react-icons/fa";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { FiEdit } from "react-icons/fi";
+
 import { maskDate } from "../../utils/inputMasks";
-import { useNavigate } from "react-router-dom";
-import {
-  handleEdition,
-  openEdition,
-  setDailyEdition,
-  toggleModal,
-} from "../../redux/features/dailies";
-import { useDispatch } from "react-redux";
+
+import { setDailyEdition, toggleModal } from "../../redux/features/dailies";
 
 export const Row = ({ daily }) => {
   const { id, type, value, date } = daily;
@@ -36,7 +34,7 @@ export const Row = ({ daily }) => {
 
       <td className="info" align="left">
         <p>{type == "1" ? "Diária" : "Pagamento"}</p>
-        {/* <span>{maskDate(date)}</span> */}
+        <span>{maskDate(date)}</span>
       </td>
 
       <td>
@@ -46,7 +44,7 @@ export const Row = ({ daily }) => {
       </td>
 
       <td className="arrow" align="center">
-        <MdOutlineKeyboardArrowDown size={"1.2rem"} />
+        <FiEdit size={"1.2rem"} />
       </td>
     </TableRow>
   );

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
 
 import styled from "styled-components";
-import { api } from "../assets/api";
+
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   clearDailyEdition,
-  closeEdition,
   createDaily,
   toggleModal,
   updateDaily,
@@ -19,6 +18,7 @@ export const AddDaily = ({ openModal, closeModal }) => {
 
   const { user_id } = useSelector((state) => state.login);
   const { edit, dailyEdit } = useSelector((state) => state.dailies.edition);
+
 
   const [daily, setDaily] = useState({
     type: "1",
