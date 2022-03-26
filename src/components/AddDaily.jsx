@@ -120,7 +120,7 @@ export const ContainerModal = styled.div`
   bottom: 0;
   left: 0;
 
-  z-index: 2;
+  z-index: 3;
 
   display: flex;
   align-items: center;

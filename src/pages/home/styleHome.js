@@ -12,6 +12,8 @@ export const AppContainer = styled.div`
   margin: 0 auto;
   max-width: 768px;
 
+  overflow: hidden;
+
   position: relative;
   color: #ededed;
 `;
@@ -53,8 +55,6 @@ export const Header = styled.header`
 
       margin: 5px;
 
-
-
       span {
         display: flex;
         align-items: center;
@@ -94,6 +94,8 @@ export const Headding = styled.div`
 
     display: flex;
     justify-content: center;
+
+    z-index: 2;
 
     span {
       color: #eeeeee;

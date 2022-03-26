@@ -6,14 +6,18 @@ import { ImExit } from "react-icons/im";
 
 import { Loading } from "../../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
-import { getDailies, toggleModal } from "../../redux/features/dailies";
+import {
+  clearDailies,
+  getDailies,
+  toggleModal,
+} from "../../redux/features/dailies";
 import { AddDaily } from "../../components/AddDaily";
-import { logOut } from "../../redux/features/login";
+import { logout } from "../../redux/features/login";
 
 export const Home = () => {
   const dispatch = useDispatch();
 
-  const { user_id } = useSelector((state) => state.login);
+  const { user_id, user_name } = useSelector((state) => state.login);
   const { data, debt, modal, loading } = useSelector((state) => state.dailies);
 
   const [showconfig, setShowconfig] = useState(false);
@@ -27,8 +31,9 @@ export const Home = () => {
   };
 
   const exit = () => {
-    console.log("sair");
-    dispatch(logOut());
+    dispatch(logout());
+    dispatch(clearDailies());
+    localStorage.removeItem("user");
   };
 
   return (
@@ -38,14 +43,14 @@ export const Home = () => {
 
       <Header>
         <div className="user-name">
-          <span>Kamila</span>
+          <span>{user_name}</span>
         </div>
 
         <div className="user-profile" onClick={toggleConfig}>
           <img src={require("../../assets/images/profile.png")} alt="" />
           <br />
           {showconfig && (
-            <div className="menu-config">
+            <div className="menu-config animate__animated animate__fadeInRight">
               <span onClick={exit}>
                 Sair <ImExit />
               </span>
@@ -56,12 +61,12 @@ export const Home = () => {
 
       <Headding>
         <h3>Valor da divida</h3>
-        <div className="box-heading">
+        <div className="box-heading animate__animated animate__fadeInDown">
           <span>{`R$ ${debt},00`}</span>
         </div>
       </Headding>
 
-      <Box>
+      <Box className="animate__animated animate__fadeInUp">
         <table>
           <tbody>
             {data?.length ? (

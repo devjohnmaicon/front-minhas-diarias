@@ -40,14 +40,17 @@ export const Login = () => {
   }, []);
 
   return (
-    <Container>
+    <Container className="animate__animated animate__fadeIn">
       <Top>
         <div className="logo">
           <h2>MY DAILY</h2>
         </div>
       </Top>
 
-      <Form onSubmit={handleSubmit}>
+      <Form
+        onSubmit={handleSubmit}
+        
+      >
         <div className="box-form">
           <input
             name="email"

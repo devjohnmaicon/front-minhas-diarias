@@ -80,6 +80,14 @@ export const dailiesSlice = createSlice({
 
       state.debt = currentValue + action.payload;
     },
+    clearDailies(state) {
+      state.debt = 0;
+      state.data = [];
+      state.dailyEdit = {};
+      state.modal = false;
+      state.loading = false;
+      state.error = null;
+    },
   },
 });
 
@@ -93,6 +101,7 @@ export const {
   clearDailyEdition,
   update,
   handleDebt,
+  clearDailies,
 } = dailiesSlice.actions;
 
 export const getDailies = (user_id) => async (dispatch) => {

@@ -6,12 +6,13 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/configureStore";
+import "animate.css";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-          <App />
+        <App />
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,
