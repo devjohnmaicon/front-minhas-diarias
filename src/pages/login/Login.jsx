@@ -3,11 +3,15 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
+import { signIn } from "../../redux/features/login";
 
 export const Login = () => {
   const dispatch = useDispatch();
 
-  const [credentials, setCredentials] = useState({});
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
 
   const navigate = useNavigate();
 
@@ -17,8 +21,12 @@ export const Login = () => {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+
+    dispatch(signIn(credentials));
+
+    navigate("/home");
   };
 
   return (
@@ -35,7 +43,7 @@ export const Login = () => {
             name="email"
             type="email"
             placeholder="Digite seu email"
-            // value={daily.value}
+            value={credentials.email}
             onChange={handleChange}
           />
         </div>
@@ -45,7 +53,7 @@ export const Login = () => {
             name="password"
             type="password"
             placeholder="Password"
-            // value={daily.value}
+            value={credentials.password}
             onChange={handleChange}
           />
         </div>

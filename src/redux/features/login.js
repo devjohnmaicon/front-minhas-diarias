@@ -1,26 +1,43 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const initialState = { value: 0 };
+import { toast } from "react-toastify";
+import { api } from "../../assets/api";
 
 const loginSlice = createSlice({
   name: "login",
   initialState: {
-    token: "123",
-    user_name: "username",
-    user_id: "b24c471e-47cb-49a2-9ffa-aac10ce9fdb6",
+    token: "",
+    user_name: "",
+    user_id: "",
+    logged: false,
+    error: null,
   },
-  //   reducers: {
-  //     increment(state) {
-  //       state.value++;
-  //     },
-  //     decrement(state) {
-  //       state.value--;
-  //     },
-  //     incrementByAmount(state, action) {
-  //       state.value += action.payload;
-  //     },
-  //   },
+  reducers: {
+    login(state, action) {
+      state.token = action.payload.token;
+      state.user_name = action.payload.user_name;
+      state.user_id = action.payload.id;
+      state.logged = true;
+    },
+    errorLogin(state, action) {
+      state.error = action.payload;
+    },
+  },
 });
 
-// export const { increment, decrement, incrementByAmount } = login.actions;
+export const { login, errorLogin } = loginSlice.actions;
+
 export default loginSlice.reducer;
+
+export const signIn = (credentials) => async (dispatch) => {
+  try {
+    const { data } = await api.post("/login", credentials);
+
+    dispatch(login(data));
+  } catch (e) {
+    toast.error("Email e Password são obrigatorios !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+
+    dispatch(errorLogin(e.message));
+  }
+};
