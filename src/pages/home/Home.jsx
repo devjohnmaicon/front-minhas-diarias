@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Row } from "./Row";
 import { AppContainer, Box, Buttons, Headding, Header } from "./styleHome";
 import { BsPlusLg } from "react-icons/bs";
+import { ImExit } from "react-icons/im";
 
 import { Loading } from "../../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { getDailies, toggleModal } from "../../redux/features/dailies";
 import { AddDaily } from "../../components/AddDaily";
+import { logOut } from "../../redux/features/login";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -14,9 +16,20 @@ export const Home = () => {
   const { user_id } = useSelector((state) => state.login);
   const { data, debt, modal, loading } = useSelector((state) => state.dailies);
 
+  const [showconfig, setShowconfig] = useState(false);
+
   useEffect(() => {
     dispatch(getDailies(user_id));
   }, []);
+
+  const toggleConfig = () => {
+    setShowconfig(!showconfig);
+  };
+
+  const exit = () => {
+    console.log("sair");
+    dispatch(logOut());
+  };
 
   return (
     <AppContainer>
@@ -27,8 +40,17 @@ export const Home = () => {
         <div className="user-name">
           <span>Kamila</span>
         </div>
-        <div className="user-profile">
+
+        <div className="user-profile" onClick={toggleConfig}>
           <img src={require("../../assets/images/profile.png")} alt="" />
+          <br />
+          {showconfig && (
+            <div className="menu-config">
+              <span onClick={exit}>
+                Sair <ImExit />
+              </span>
+            </div>
+          )}
         </div>
       </Header>
 

@@ -13,8 +13,9 @@ const INITIAL_STATE = {
 export const Login = () => {
   const dispatch = useDispatch();
 
-  const [credentials, setCredentials] = useState(INITIAL_STATE);
+  const navigate = useNavigate();
 
+  const [credentials, setCredentials] = useState(INITIAL_STATE);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +30,7 @@ export const Login = () => {
 
     setCredentials(INITIAL_STATE);
 
+    navigate("/home");
   };
 
   useEffect(() => {

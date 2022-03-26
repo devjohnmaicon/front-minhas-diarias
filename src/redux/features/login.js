@@ -21,10 +21,17 @@ const loginSlice = createSlice({
     errorLogin(state, action) {
       state.error = action.payload;
     },
+    exit(state) {
+      state.token = "";
+      state.user_name = "";
+      state.user_id = "";
+      state.logged = false;
+      state.error = null;
+    },
   },
 });
 
-export const { login, errorLogin } = loginSlice.actions;
+export const { login, errorLogin, exit } = loginSlice.actions;
 
 export default loginSlice.reducer;
 
@@ -48,4 +55,9 @@ export const autoLogin = (hasLoged) => async (dispatch, getState) => {
   if (hasLoged) {
     dispatch(login(hasLoged));
   }
+};
+
+export const logOut = () => async (dispatch) => {
+  dispatch(exit());
+  window.localStorage.removeItem("user");
 };

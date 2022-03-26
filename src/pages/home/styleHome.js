@@ -30,6 +30,8 @@ export const Header = styled.header`
   }
 
   .user-profile {
+    cursor: pointer;
+
     height: 2rem;
     width: 2rem;
 
@@ -37,6 +39,30 @@ export const Header = styled.header`
       width: 100%;
       height: 100%;
       object-fit: fill;
+    }
+
+    .menu-config {
+      position: absolute;
+      right: 0;
+
+      background-color: #444444;
+      width: 5rem;
+
+      border-radius: 5px;
+      padding: 0.5rem;
+
+      margin: 5px;
+
+
+
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1.2rem;
+        font-weight: bolder;
+        cursor: pointer;
+      }
     }
   }
 `;
@@ -52,7 +78,7 @@ export const Headding = styled.div`
   margin-bottom: 1rem;
 
   h3 {
-    color: #EEEEEE;
+    color: #eeeeee;
     font-size: 1.3rem;
     font-weight: bolder;
   }
@@ -70,7 +96,7 @@ export const Headding = styled.div`
     justify-content: center;
 
     span {
-      color: #EEEEEE;
+      color: #eeeeee;
       font-weight: bold;
       font-size: 2.5rem;
     }
