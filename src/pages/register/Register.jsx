@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   password: "",
 };
 
-export const Login = () => {
+export const Register = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -60,14 +60,24 @@ export const Login = () => {
 
       <Form onSubmit={handleSubmit}>
         <div className="title">
-          <h2>Login</h2>
+          <h2>Cadastro de usuário</h2>
+        </div>
+
+        <div className="box-form">
+          <input
+            name="name"
+            type="text"
+            placeholder="Nome"
+            value={credentials.name}
+            onChange={handleChange}
+          />
         </div>
 
         <div className="box-form">
           <input
             name="email"
             type="email"
-            placeholder="Digite seu email"
+            placeholder="Email"
             value={credentials.email}
             onChange={handleChange}
           />
@@ -83,16 +93,18 @@ export const Login = () => {
           />
         </div>
 
+        <div className="box-form">
+          <input
+            name="confirmPassword"
+            type="password"
+            placeholder="Confirmar Senha"
+            // value={credentials.confirmPassword}
+            // onChange={handleChange}
+          />
+        </div>
+
         <div className="box-buttons">
-          <button className="btn-cancel">Entrar</button>
-        </div>
-
-        <div className="link">
-          <a href="">Esqueci minha senha</a>
-        </div>
-
-        <div className="link">
-          <a href="">Não tenho cadastro</a>
+          <button className="btn-cancel">Registrar</button>
         </div>
       </Form>
     </Container>
@@ -108,6 +120,8 @@ export const Container = styled.div`
   height: 100%;
   max-width: 768px;
   margin: 0 auto;
+
+
 `;
 
 export const Top = styled.div`
@@ -116,8 +130,6 @@ export const Top = styled.div`
   align-items: center;
 
   .logo {
-    padding: 1rem 0;
-
     h2 {
       font-size: 4rem;
       font-weight: bold;

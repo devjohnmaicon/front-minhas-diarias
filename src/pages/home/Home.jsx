@@ -11,8 +11,8 @@ import {
   getDailies,
   toggleModal,
 } from "../../redux/features/dailies";
-import { AddDaily } from "../../components/AddDaily";
 import { logout } from "../../redux/features/login";
+import { Modal } from "./modal/modal";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -39,10 +39,10 @@ export const Home = () => {
   return (
     <AppContainer>
       {loading && <Loading />}
-      {modal && <AddDaily />}
+      {modal && <Modal />}
 
-      <Header> 
-        <div className="user-name"> 
+      <Header>
+        <div className="user-name">
           <span>{user_name}</span>
         </div>
 

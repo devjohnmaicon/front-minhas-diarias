@@ -9,12 +9,12 @@ import {
   createDaily,
   toggleModal,
   updateDaily,
-} from "../redux/features/dailies";
+} from "../../../redux/features/dailies";
 
-import { getDate } from "../utils/inputMasks";
+import { getDate } from "../../../utils/inputMasks";
 import { toast } from "react-toastify";
 
-export const AddDaily = ({ openModal, closeModal }) => {
+export const Modal = ({ openModal, closeModal }) => {
   const dispatch = useDispatch();
 
   const { user_id } = useSelector((state) => state.login);
