@@ -8,11 +8,11 @@ import { Register } from "../pages/register/Register";
 export const Routes = () => {
   return (
     <Switch>
-      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
       <Route
-        path="/home"
+        path="/"
         element={
           <RequireAuth>
             <Home />

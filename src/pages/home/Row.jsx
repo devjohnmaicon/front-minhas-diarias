@@ -8,8 +8,8 @@ import { FaDiaspora } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 
 import { maskDate } from "../../utils/inputMasks";
+import { setDailyEdition, toggleModal } from '../../redux/features/user/sliceUser';
 
-import { setDailyEdition, toggleModal } from "../../redux/features/user";
 
 export const Row = ({ daily }) => {
   const { id, type, value, date } = daily;

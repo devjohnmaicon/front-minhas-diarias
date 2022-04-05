@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import styled from "styled-components";
-import { autoLogin, signIn } from "../../redux/features/login";
+import { autoLogin, signIn } from "../../redux/features/login/thunkLogin";
 
 const INITIAL_STATE = {
   email: "",
@@ -41,7 +41,7 @@ export const Login = () => {
 
     setCredentials(INITIAL_STATE);
 
-    navigate("/home");
+    navigate("/");
   };
 
   useEffect(() => {

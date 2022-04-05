@@ -4,11 +4,13 @@ import { AppContainer, Box, Buttons, Headding, Header } from "./styleHome";
 import { BsPlusLg } from "react-icons/bs";
 import { ImExit } from "react-icons/im";
 
+import { Modal } from "./modal/modal";
+
 import { Loading } from "../../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
-import { clearDailies, getUser, toggleModal } from "../../redux/features/user";
-import { logout } from "../../redux/features/login";
-import { Modal } from "./modal/modal";
+import { getUser } from '../../redux/features/user/thunkUser';
+import { logout } from '../../redux/features/login/sliceLogin';
+import { clearDailies, toggleModal } from '../../redux/features/user/sliceUser';
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -30,7 +32,7 @@ export const Home = () => {
 
   const exit = () => {
     dispatch(logout());
-    dispatch(clearDailies());
+    dispatch(clearDailies ());
     localStorage.removeItem("user");
   };
 

@@ -4,15 +4,11 @@ import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  clearDailyEdition,
-  createDaily,
-  toggleModal,
-  updateDaily,
-} from "../../../redux/features/user";
 
 import { getDate } from "../../../utils/inputMasks";
 import { toast } from "react-toastify";
+import { createDaily, updateDaily } from '../../../redux/features/user/thunkUser';
+import { clearDailyEdition, toggleModal } from '../../../redux/features/user/sliceUser';
 
 export const Modal = ({ openModal, closeModal }) => {
   const dispatch = useDispatch();
