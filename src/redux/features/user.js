@@ -3,11 +3,13 @@ import { toast } from "react-toastify";
 import { api } from "../../assets/api";
 import { calculateDebit, sumDebit } from "../../utils/calculateDebit";
 
-export const dailiesSlice = createSlice({
-  name: "dailies",
+export const userSlice = createSlice({
+  name: "user",
   initialState: {
-    debt: 0,
+    user_name: "",
+    emaill: "",
     data: [],
+    debt: 0,
     edition: {
       edit: false,
       dailyEdit: {},
@@ -22,13 +24,15 @@ export const dailiesSlice = createSlice({
     },
 
     fetchData(state, action) {
-      state.data = action.payload;
+      state.user_name = action.payload.user_name;
+      state.email = action.payload.email;
+      state.data = action.payload.dailies;
       state.loading = false;
       state.error = null;
     },
 
     fetchError(state, action) {
-      state.data = null;
+      state.data = [];
       state.loading = false;
       state.error = action.payload;
     },
@@ -102,16 +106,21 @@ export const {
   update,
   handleDebt,
   clearDailies,
-} = dailiesSlice.actions;
+} = userSlice.actions;
 
-export const getDailies = (user_id) => async (dispatch) => {
+export const getUser = (user_id) => async (dispatch) => {
   try {
     dispatch(fetchStarted());
-    const { data } = await api.post("/getDailies", { user_id });
 
-    dispatch(handleDebt(calculateDebit(data)));
+    const {
+      data: { user_name, email, dailies, created_at },
+    } = await api.post("/getInfo", { user_id });
 
-    dispatch(fetchData(data));
+    dispatch(handleDebt(calculateDebit(dailies)));
+
+    dispatch(
+      fetchData({ user_name, email, dailies: dailies.reverse(), created_at })
+    );
   } catch (error) {
     dispatch(fetchError(error.message));
   }
@@ -157,4 +166,4 @@ export const updateDaily = (daily) => async (dispatch) => {
   }
 };
 
-export default dailiesSlice.reducer;
+export default userSlice.reducer;

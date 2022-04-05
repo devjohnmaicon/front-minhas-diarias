@@ -6,24 +6,22 @@ import { ImExit } from "react-icons/im";
 
 import { Loading } from "../../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  clearDailies,
-  getDailies,
-  toggleModal,
-} from "../../redux/features/dailies";
+import { clearDailies, getUser, toggleModal } from "../../redux/features/user";
 import { logout } from "../../redux/features/login";
 import { Modal } from "./modal/modal";
 
 export const Home = () => {
   const dispatch = useDispatch();
 
-  const { user_id, user_name } = useSelector((state) => state.login);
-  const { data, debt, modal, loading } = useSelector((state) => state.dailies);
+  const { user_id } = useSelector((state) => state.login);
+  const { user_name, data, debt, modal, loading } = useSelector(
+    (state) => state.user
+  );
 
   const [showconfig, setShowconfig] = useState(false);
 
   useEffect(() => {
-    dispatch(getDailies(user_id));
+    dispatch(getUser(user_id));
   }, []);
 
   const toggleConfig = () => {
