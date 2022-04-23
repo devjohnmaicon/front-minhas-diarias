@@ -5,9 +5,9 @@ import { Login } from "../pages/login/Login";
 export const RequireAuth = ({ children }) => {
   const { logged } = useSelector((state) => state.login);
 
-  if (!logged) {
-    return <Login />;
-  }
+  // if (!logged) {
+  //   return <Login />;
+  // }
 
   return <>{children}</>;
 };
