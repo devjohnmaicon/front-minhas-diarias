@@ -6,15 +6,30 @@ import {
   HStack,
   Image,
   Text,
+  useDisclosure,
   VStack,
 } from '@chakra-ui/react';
 import React from 'react';
+import { ModalPayment } from '../modal-payment';
 
-export const Card = () => {
+export const Card = ({ employee }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const initialRef = React.useRef();
+  const finalRef = React.useRef();
+
+  <Button>Open Modal</Button>;
+
   return (
     <Box>
+      <ModalPayment
+        initialRef={initialRef}
+        finalRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        data={employee}
+      />
       <Flex
-        h={220}
+        h={200}
         direction='column'
         justifyContent='center'
         alignItems='center'
@@ -33,16 +48,18 @@ export const Card = () => {
 
         <VStack mt={5}>
           <Text fontWeight={600} fontSize={32}>
-            Jao Antônio
+            {employee.name}
           </Text>
 
-          <Text fontSize={18}>Sushi Man</Text>
+          <Text fontSize={18}>{employee.role}</Text>
 
           <HStack gap={6}>
             <Text fontSize={24} fontWeight={600}>
-              R$ 600,00
+              {`R$ ${employee.balance},00`}
             </Text>
-            <Button variant='solid'>Pagar</Button>
+            <Button onClick={onOpen} variant='solid'>
+              Pagar
+            </Button>
           </HStack>
         </VStack>
       </Flex>

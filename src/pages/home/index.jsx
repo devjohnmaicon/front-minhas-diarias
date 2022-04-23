@@ -1,10 +1,34 @@
-import { Box, Center, Grid, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import React from 'react';
+import { Center, SimpleGrid, Text, VStack } from '@chakra-ui/react';
 import { Card } from '../../components/card';
 
 export const Home = () => {
+  const fakeData = [
+    {
+      name: 'Ana',
+      role: 'Sushi man',
+      balance: 500,
+    },
+    {
+      name: 'Maria',
+      role: 'Caixa',
+      balance: 500,
+    },
+    {
+      name: 'Beto',
+      role: 'Sushi man',
+      balance: 500,
+    },
+    {
+      name: 'Paulo',
+      role: 'Garçon',
+      balance: 500,
+    },
+  ];
+
   return (
     <VStack w='full' h='90%' overflowY='auto'>
-      <Center justifyContent='center'>
+      <Center pb={4}>
         <Text fontSize='3rem'>Funcionários</Text>
       </Center>
 
@@ -15,14 +39,9 @@ export const Home = () => {
         px={['14px', '44px', '60px']}
         py={4}
       >
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {fakeData.map((employee) => (
+          <Card employee={employee} />
+        ))}
       </SimpleGrid>
     </VStack>
   );
