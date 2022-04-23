@@ -18,7 +18,7 @@ export const Header = () => {
       <Text fontSize={22}>Usuário</Text>
 
       <Image
-        boxSize='50px'
+        boxSize={['40px' ,'50px']}
         objectFit='cover'
         src='https://bit.ly/dan-abramov'
         alt='Dan Abramov'

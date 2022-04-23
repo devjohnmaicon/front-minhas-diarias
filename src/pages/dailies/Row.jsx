@@ -1,15 +1,28 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import styled from "styled-components";
-import { FiDollarSign } from "react-icons/fi";
-import { FaDiaspora } from "react-icons/fa";
-import { FiEdit } from "react-icons/fi";
+import styled from 'styled-components';
+import { FiDollarSign } from 'react-icons/fi';
+import { FaDiaspora } from 'react-icons/fa';
+import { FiEdit } from 'react-icons/fi';
 
-import { maskDate } from "../../utils/inputMasks";
-import { setDailyEdition, toggleModal } from '../../redux/features/user/sliceUser';
-
+import { maskDate } from '../../utils/inputMasks';
+import {
+  setDailyEdition,
+  toggleModal,
+} from '../../redux/features/user/sliceUser';
+import {
+  HStack,
+  Stat,
+  StatArrow,
+  StatHelpText,
+  StatLabel,
+  StatNumber,
+  Td,
+  Text,
+  Tr,
+} from '@chakra-ui/react';
 
 export const Row = ({ daily }) => {
   const { id, type, value, date } = daily;
@@ -23,30 +36,29 @@ export const Row = ({ daily }) => {
   };
 
   return (
-    <TableRow className="row" type={type} onClick={openEdit}>
-      <td className="icon" align="center">
-        {type == "1" ? (
-          <FaDiaspora size={"1.4rem"} />
-        ) : (
-          <FiDollarSign size={"1.5rem"} />
-        )}
-      </td>
+    <Tr className='row' type={type} onClick={openEdit}>
+      <Td px={['10px', '20px']}>
+        <Stat>
+          <StatLabel fontSize={['1.2rem', '1.5rem']} mb={['2px', '10px']}>
+            {type == '1' ? 'Pagamento' : 'Diária'}
+          </StatLabel>
+          <StatHelpText fontSize={['1rem', '1.2rem']}>{date}</StatHelpText>
+        </Stat>
+      </Td>
 
-      <td className="info" align="left">
-        <p>{type == "1" ? "Diária" : "Pagamento"}</p>
-        <span>{maskDate(date)}</span>
-      </td>
+      <Td px={1}>
+        <Stat>
+          <StatHelpText fontSize={['1rem', '1.5rem']} fontWeight={600}>
+            <StatArrow boxSize={["15px", "20px"]} type={type == 1 ? 'decrease' : 'increase'} />
+            {`  R$ ${value},00`}
+          </StatHelpText>
+        </Stat>
+      </Td>
 
-      <td>
-        <span className="value">
-          {`${type == 2 ? "-" : "+"} R$ ${value},00`}
-        </span>
-      </td>
-
-      <td className="arrow" align="center">
-        <FiEdit size={"1.2rem"} />
-      </td>
-    </TableRow>
+      <Td className='arrow' align='center' px={2}>
+        <FiEdit size={'1.2rem'} />
+      </Td>
+    </Tr>
   );
 };
 
@@ -98,7 +110,7 @@ const TableRow = styled.tr`
 
     font-weight: 600;
     font-size: 1.2rem;
-    color: ${(props) => (props.type === "1" ? "" : "#7BC74D")};
+    color: ${(props) => (props.type === '1' ? '' : '#7BC74D')};
   }
 
   .arrow {

@@ -17,7 +17,6 @@ export const Card = ({ employee }) => {
   const initialRef = React.useRef();
   const finalRef = React.useRef();
 
-  <Button>Open Modal</Button>;
 
   return (
     <Box>

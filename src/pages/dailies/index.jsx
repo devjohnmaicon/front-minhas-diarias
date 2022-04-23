@@ -14,20 +14,20 @@ import { clearDailies, toggleModal } from '../../redux/features/user/sliceUser';
 import {
   Button,
   Center,
-  Container,
-  HStack,
-  Image,
+  Stat,
+  StatArrow,
+  StatHelpText,
+  StatLabel,
+  StatNumber,
   Table,
   TableContainer,
   Tbody,
-  Td,
   Text,
-  Th,
-  Thead,
-  Tr,
+  useDisclosure,
   VStack,
 } from '@chakra-ui/react';
 import { mock } from '../../utils/db';
+import { ModalDaily } from '../../components/moda-daily';
 
 export const Dailies = () => {
   const dispatch = useDispatch();
@@ -37,29 +37,29 @@ export const Dailies = () => {
     (state) => state.user
   );
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const initialRef = React.useRef();
+  const finalRef = React.useRef();
+
   useEffect(() => {
     dispatch(getUser(user_id));
   }, []);
-
-  function Row() {
-    return (
-      <Tr>
-        <Td>inches</Td>
-        <Td>millimetres (mm)</Td>
-        <Td>25.4</Td>
-        <Td>25.4</Td>
-        <Td>Edit</Td>
-      </Tr>
-    );
-  }
 
   return (
     <VStack w='full' h='90%'>
       {loading && <Loading />}
       {modal && <Modal />}
 
+      <ModalDaily
+        initialRef={initialRef}
+        finalRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        // data={employee}
+      />
+
       <VStack w='full' flex={1} mb={2}>
-        <Text fontSize={24} fontWeight={600}>
+        <Text fontSize={24} fontWeight={600} w={['full', '40%']}>
           Valor da divida
         </Text>
 
@@ -67,12 +67,12 @@ export const Dailies = () => {
           className='box-heading animate__animated animate__fadeInDown'
           bg='red.200'
           h={100}
-          w='50%'
+          w={['100%', '80%', '40%']}
           borderRadius={15}
           justifyContent='center'
           alignItems='center'
         >
-          <Text fontSize={60}>{`R$ ${debt},00`}</Text>
+          <Text fontSize={['3rem', '4rem']}>{`R$ ${debt},00`}</Text>
         </Center>
       </VStack>
 
@@ -88,26 +88,10 @@ export const Dailies = () => {
         overflowY='auto'
       >
         <Table>
-          <Thead>
-            <Tr>
-              <Th></Th>
-              <Th>Tipo</Th>
-              <Th>Data</Th>
-              <Th>Valor</Th>
-              <Th></Th>
-            </Tr>
-          </Thead>
           <Tbody>
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
-            <Row />
+            {mock.map((item, index) => (
+              <Row key={index} daily={item} />
+            ))}
           </Tbody>
         </Table>
       </TableContainer>
@@ -117,7 +101,8 @@ export const Dailies = () => {
           w={180}
           h={70}
           bg='red'
-          onClick={() => dispatch(toggleModal(true))}
+          // onClick={() => dispatch(toggleModal(true))}
+          onClick={onOpen}
         >
           <BsPlusLg size={'1.2rem'} color='#EDEDED' />
         </Button>

@@ -39,8 +39,8 @@ export const Home = () => {
         px={['14px', '44px', '60px']}
         py={4}
       >
-        {fakeData.map((employee) => (
-          <Card employee={employee} />
+        {fakeData.map((employee, index) => (
+          <Card key={index} employee={employee} />
         ))}
       </SimpleGrid>
     </VStack>
