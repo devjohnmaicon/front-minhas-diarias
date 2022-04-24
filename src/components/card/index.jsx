@@ -17,9 +17,8 @@ export const Card = ({ employee }) => {
   const initialRef = React.useRef();
   const finalRef = React.useRef();
 
-
   return (
-    <Box>
+    <Box  className='box-heading animate__animated animate__fadeIn'>
       <ModalPayment
         initialRef={initialRef}
         finalRef={finalRef}
@@ -28,12 +27,14 @@ export const Card = ({ employee }) => {
         data={employee}
       />
       <Flex
-        h={200}
+        h={190}
         direction='column'
-        justifyContent='center'
+        // justifyContent='center'
         alignItems='center'
         borderRadius={20}
-        border='1px solid #000'
+        borderWidth={1}
+        bg='#F2F2F2'
+        color='black'
         shadow='5px 5px 16px 4px rgba(0,0,0,0.41)'
       >
         <Image
@@ -45,7 +46,8 @@ export const Card = ({ employee }) => {
           mt='-8'
         />
 
-        <VStack mt={5}>
+        <VStack mt={2}>
+
           <Text fontWeight={600} fontSize={32}>
             {employee.name}
           </Text>
@@ -56,7 +58,8 @@ export const Card = ({ employee }) => {
             <Text fontSize={24} fontWeight={600}>
               {`R$ ${employee.balance},00`}
             </Text>
-            <Button onClick={onOpen} variant='solid'>
+
+            <Button onClick={onOpen} colorScheme='red' variant='solid'>
               Pagar
             </Button>
           </HStack>

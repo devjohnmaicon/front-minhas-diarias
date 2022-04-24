@@ -8,11 +8,11 @@ import { Home } from '../pages/home';
 export const Routes = () => {
   return (
     <Switch>
-      <Route path='/login' element={<Login />} />
-      <Route path='/register' element={<Register />} />
+      <Route path='/' element={<Login />} />
+      <Route path='register' element={<Register />} />
 
-      <Route path='/home' element={<Home />} />
-      <Route path='/dailies' element={<Dailies />} />
+      <Route path='home' element={<Home />} />
+      <Route path='daily' element={<Dailies />} />
     </Switch>
   );
 };

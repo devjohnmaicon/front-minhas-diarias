@@ -31,7 +31,7 @@ export const ModalPayment = ({
       >
         <ModalOverlay />
 
-        <ModalContent>
+        <ModalContent bg='#F2F2F2' p={4}>
           <ModalHeader>
             Pagamento ({data.role}) {data.name}
           </ModalHeader>
@@ -45,18 +45,18 @@ export const ModalPayment = ({
             </Center>
 
             <FormControl>
-              <FormLabel>Valor Pago</FormLabel>
-              <Input type='number' placeholder='Ex: 60,00 ' />
+              <FormLabel fontWeight={600}>Valor Pago</FormLabel>
+              <Input type='number' fontSize={20} focusBorderColor='#F05454' placeholder='Ex: 60 ' />
             </FormControl>
 
             <FormControl mt={4}>
-              <FormLabel>Anexar comprovante</FormLabel>
-              <Input type='file' />
+              <FormLabel fontWeight={600}>Anexar comprovante</FormLabel>
+              <Input fontSize={20} focusBorderColor='#F05454' type='file' />
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3}>
+            <Button colorScheme='red' mr={3}>
               Salvar
             </Button>
             <Button onClick={onClose}>Cancelar</Button>

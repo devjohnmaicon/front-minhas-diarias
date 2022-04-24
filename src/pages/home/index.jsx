@@ -34,7 +34,7 @@ export const Home = () => {
 
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3 }}
-        spacing={8}
+        spacing={10}
         w='full'
         px={['14px', '44px', '60px']}
         py={4}

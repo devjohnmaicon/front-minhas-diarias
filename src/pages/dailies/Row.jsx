@@ -24,20 +24,16 @@ import {
   Tr,
 } from '@chakra-ui/react';
 
-export const Row = ({ daily }) => {
+export const Row = ({ daily, setModal }) => {
   const { id, type, value, date } = daily;
 
-  const dispatch = useDispatch();
-
-  const openEdit = () => {
-    dispatch(toggleModal(true));
-
-    dispatch(setDailyEdition(daily));
+  const handleEdit = () => {
+    setModal({ isOpen: true, data: daily });
   };
 
   return (
-    <Tr className='row' type={type} onClick={openEdit}>
-      <Td px={['10px', '20px']}>
+    <Tr type={type} onClick={handleEdit} cursor='pointer' >
+      <Td px={['10px', '20px']} py={3}>
         <Stat>
           <StatLabel fontSize={['1.2rem', '1.5rem']} mb={['2px', '10px']}>
             {type == '1' ? 'Pagamento' : 'Diária'}
@@ -49,13 +45,16 @@ export const Row = ({ daily }) => {
       <Td px={1}>
         <Stat>
           <StatHelpText fontSize={['1rem', '1.5rem']} fontWeight={600}>
-            <StatArrow boxSize={["15px", "20px"]} type={type == 1 ? 'decrease' : 'increase'} />
+            <StatArrow
+              boxSize={['15px', '20px']}
+              type={type == 1 ? 'decrease' : 'increase'}
+            />
             {`  R$ ${value},00`}
           </StatHelpText>
         </Stat>
       </Td>
 
-      <Td className='arrow' align='center' px={2}>
+      <Td align='center' px={2}>
         <FiEdit size={'1.2rem'} />
       </Td>
     </Tr>
